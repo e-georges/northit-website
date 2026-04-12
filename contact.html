@@ -251,7 +251,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
         <span class="info-icon">✉️</span>
         <div>
           <div class="info-label">Email</div>
-          <div class="info-val"><a href="mailto:e.georges@northit.fr">e.georges@northit.fr</a></div>
+          <div class="info-val"><a href="/cdn-cgi/l/email-protection#01642f66646e73666472416f6e73756968752f6773"><span class="__cf_email__" data-cfemail="92f7bcf5f7fde0f5f7e1d2fcfde0e6fafbe6bcf4e0">[email&#160;protected]</span></a></div>
         </div>
       </div>
       <div class="info-item">
@@ -303,7 +303,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
   <div class="foot-grid">
     <div>
       <p style="font-size:.83rem;color:var(--muted);line-height:1.7;margin-bottom:10px">Organisme de formation et de certification ITIL® basé à Paris. ATO agréé PeopleCert.</p>
-      <p style="font-size:.75rem;color:rgba(244,247,255,.3);line-height:1.8">SIRET : 881 897 482 00017<br>Déclaration d'activité : 11756378175<br>✉️ <a href="mailto:e.georges@northit.fr" style="color:var(--cyan);text-decoration:none">e.georges@northit.fr</a></p>
+      <p style="font-size:.75rem;color:rgba(244,247,255,.3);line-height:1.8">SIRET : 881 897 482 00017<br>Déclaration d'activité : 11756378175<br>✉️ <a href="/cdn-cgi/l/email-protection#83e6ade4e6ecf1e4e6f0c3edecf1f7ebeaf7ade5f1" style="color:var(--cyan);text-decoration:none"><span class="__cf_email__" data-cfemail="cca9e2aba9a3beaba9bf8ca2a3beb8a4a5b8e2aabe">[email&#160;protected]</span></a></p>
     </div>
     <div>
       <div style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:14px">Formation</div>
@@ -326,7 +326,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function getLastMonday(year, month) {
   const lastDay = new Date(year, month + 1, 0).getDate();
   let day = lastDay;
@@ -374,17 +374,4 @@ document.getElementById('contactForm').addEventListener('submit', async function
       headers: {'Accept': 'application/json'}
     });
     if (response.ok) {
-      this.style.display = 'none';
-      document.getElementById('successMsg').style.display = 'block';
-    } else {
-      throw new Error('Erreur serveur');
-    }
-  } catch(err) {
-    btn.textContent = 'Envoyer ma demande →';
-    btn.disabled = false;
-    alert('Une erreur est survenue. Veuillez nous contacter directement par email : e.georges@northit.fr');
-  }
-});
-</script>
-</body>
-</html>
+      this.styl
