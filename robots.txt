@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://northit.fr/sitemap.xml
+
+# Block unnecessary files
+Disallow: /cdn-cgi/
