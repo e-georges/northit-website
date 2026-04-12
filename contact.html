@@ -213,7 +213,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
           </div>
         </div>
 
-        <div class="form-group" id="sessionGroup">
+        <div class="form-group" id="sessionGroup" style="display:block">
           <label for="session">Session souhaitée</label>
           <select id="session" name="session">
               <option value="">Sélectionner une session...</option>
@@ -349,13 +349,7 @@ while (sessions.length < 5) {
   if (mercredi > now) sessions.push({lundi, mercredi, m, y});
   m++; if (m > 11) { m = 0; y++; }
 }
-const sel = document.getElementById('session');
-sessions.forEach((s, i) => {
-  const opt = document.createElement('option');
-  opt.value = s.lundi.getDate() + '–' + s.mercredi.getDate() + ' ' + months[s.m] + ' ' + s.y;
-  opt.textContent = s.lundi.getDate() + ' – ' + s.mercredi.getDate() + ' ' + months[s.m] + ' ' + s.y + (i===0?' (prochaine)':'');
-  sel.appendChild(opt);
-});
+// Sessions already loaded as static options
 const ps = sessions[0];
 document.getElementById('prochaineSession').innerHTML =
   '<strong style="color:var(--white)">' + ps.lundi.getDate() + ' – ' + ps.mercredi.getDate() + ' ' + months[ps.m] + ' ' + ps.y + '</strong><br>Lundi au mercredi · Places limitées à 12';
