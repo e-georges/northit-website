@@ -217,7 +217,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
           <label for="session">Session souhaitée</label>
           <select id="session" name="session">
               <option value="">Sélectionner une session...</option>
-              <option value="27 – 29 avril 2026">27 – 29 avril 2026 (prochaine)</option>
+              <option value="27 – 29 avril 2026" disabled>27 – 29 avril 2026 — COMPLET — COMPLET</option>
               <option value="25 – 27 mai 2026">25 – 27 mai 2026</option>
               <option value="29 – 1 juin 2026">29 – 1 juin 2026</option>
               <option value="27 – 29 juillet 2026">27 – 29 juillet 2026</option>
@@ -333,6 +333,39 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Show/hide fields based on demand type
+document.querySelectorAll('input[name="type_demande"]').forEach(function(r) {
+  r.addEventListener('change', function() {
+    var isIntra = r.value === 'Intra-entreprise';
+    document.getElementById('nbParticipantsGroup').style.display = isIntra ? 'block' : 'none';
+    document.getElementById('sessionGroup').style.display = isIntra ? 'none' : 'block';
+  });
+});
+
+// Formspree AJAX submission
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var btn = this.querySelector('.btn-submit');
+  btn.textContent = 'Envoi en cours...';
+  btn.disabled = true;
+  fetch(this.action, {
+    method: 'POST',
+    body: new FormData(this),
+    headers: {'Accept': 'application/json'}
+  }).then(function(response) {
+    if (response.ok) {
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    } else {
+      throw new Error('Erreur');
+    }
+  }).catch(function() {
+    btn.textContent = 'Envoyer ma demande →';
+    btn.disabled = false;
+    alert('Une erreur est survenue. Contactez-nous directement : e.georges@northit.fr');
+  });
+});
+</script><script>
 function getLastMonday(year, month) {
   const lastDay = new Date(year, month + 1, 0).getDate();
   let day = lastDay;
