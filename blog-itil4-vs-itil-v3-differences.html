@@ -3,28 +3,31 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Blog ITIL® | Conseils, guides et actualités – North IT</title>
-<meta name="description" content="Le blog North IT : guides pratiques, conseils d'expert et actualités sur la certification ITIL® 4 Foundation, la gestion des services IT et la formation professionnelle."/>
-<meta name="keywords" content="blog ITIL, certification ITIL 4 Foundation, formation ITIL, gestion services IT, North IT"/>
+<title>ITIL 4 vs ITIL V3 : toutes les différences | North IT</title>
+<meta name="description" content="ITIL 4 ou ITIL V3 ? Découvrez les différences clés entre les deux versions, pourquoi migrer et comment se certifier ITIL 4 Foundation avec North IT."/>
+<meta name="keywords" content="ITIL 4 vs ITIL V3, différences ITIL v3 v4, migration ITIL v3 vers v4, nouveautés ITIL 4"/>
 <meta name="robots" content="index, follow"/>
 <meta name="author" content="North IT"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="Blog ITIL® | Conseils, guides et actualités – North IT"/>
-<meta property="og:description" content="Le blog North IT : guides pratiques, conseils d'expert et actualités sur la certification ITIL® 4 Foundation."/>
-<meta property="og:url" content="https://northit.fr/blog"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="ITIL 4 vs ITIL V3 : toutes les différences | North IT"/>
+<meta property="og:description" content="ITIL 4 ou ITIL V3 ? Découvrez les différences clés entre les deux versions, pourquoi migrer et comment se certifier ITIL 4 Foundation avec North IT."/>
+<meta property="og:url" content="https://northit.fr/blog-itil4-vs-itil-v3-differences"/>
 <meta property="og:site_name" content="North IT"/>
 <meta property="og:locale" content="fr_FR"/>
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Blog ITIL® | North IT"/>
-<meta name="twitter:description" content="Guides pratiques, conseils d'expert et actualités sur la certification ITIL® 4 Foundation."/>
-<link rel="canonical" href="https://northit.fr/blog"/>
+<meta name="twitter:title" content="ITIL 4 vs ITIL V3 : toutes les différences | North IT"/>
+<meta name="twitter:description" content="ITIL 4 ou ITIL V3 ? Découvrez les différences clés entre les deux versions, pourquoi migrer et comment se certifier ITIL 4 Foundation avec North IT."/>
+<link rel="canonical" href="https://northit.fr/blog-itil4-vs-itil-v3-differences"/>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
-  "@type": "Blog",
-  "name": "Blog North IT",
-  "description": "Guides pratiques et conseils d'expert sur la certification ITIL® 4 Foundation et la gestion des services IT",
-  "url": "https://northit.fr/blog",
-  "publisher": {"@type": "Organization", "name": "North IT", "url": "https://northit.fr"}
+  "@type": "Article",
+  "headline": "ITIL 4 vs ITIL V3 : quelles différences ?",
+  "description": "Comparaison complète entre ITIL 4 et ITIL V3 : structure, pratiques, intégration Agile/DevOps et parcours de certification.",
+  "author": {"@type": "Person", "name": "Éric GEORGES", "jobTitle": "Formateur ITIL® Expert", "worksFor": {"@type": "Organization", "name": "North IT"}},
+  "publisher": {"@type": "Organization", "name": "North IT", "url": "https://northit.fr"},
+  "datePublished": "2026-05-07",
+  "dateModified": "2026-05-07",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://northit.fr/blog-itil4-vs-itil-v3-differences"}
 }</script>
 
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700;800;900&family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
@@ -54,32 +57,58 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .breadcrumb a{color:var(--cyan);text-decoration:none}
 .breadcrumb span{margin:0 8px;opacity:.4}
 .page-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(0,170,221,.1);border:1px solid rgba(0,170,221,.25);border-radius:100px;padding:5px 16px;font-size:.75rem;font-weight:700;color:var(--cyan);margin-bottom:20px;text-transform:uppercase;letter-spacing:.5px}
+.article-meta{display:flex;align-items:center;gap:20px;margin-top:20px;font-size:.82rem;color:var(--muted);flex-wrap:wrap}
 h1{font-family:'Raleway',sans-serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-1.5px;margin-bottom:14px}
 h1 em{color:var(--cyan);font-style:normal}
-.hero-desc{color:var(--muted);font-size:.97rem;max-width:560px;line-height:1.75}
 
-/* BLOG GRID */
-.blog-section{max-width:1100px;margin:0 auto;padding:72px 5%}
-.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:0}
-.blog-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .25s,border-color .25s;display:flex;flex-direction:column}
-.blog-card:hover{transform:translateY(-5px);border-color:rgba(0,170,221,.4)}
-.card-body{padding:28px 26px 24px;flex:1;display:flex;flex-direction:column}
-.card-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,170,221,.1);border:1px solid rgba(0,170,221,.2);border-radius:100px;padding:4px 12px;font-size:.7rem;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;width:fit-content}
-.card-title{font-family:'Raleway',sans-serif;font-size:1.08rem;font-weight:800;line-height:1.25;margin-bottom:12px;color:var(--white)}
-.card-excerpt{font-size:.85rem;color:var(--muted);line-height:1.7;flex:1;margin-bottom:20px}
-.card-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.06);padding-top:14px;font-size:.78rem;color:rgba(244,247,255,.4)}
-.card-read{color:var(--cyan);font-weight:700;font-size:.82rem;display:flex;align-items:center;gap:5px}
-.card-read::after{content:'→'}
+/* ARTICLE BODY */
+.article-wrap{max-width:1100px;margin:0 auto;padding:72px 5%;display:grid;grid-template-columns:1fr 320px;gap:64px;align-items:start}
+.article-content h2{font-family:'Raleway',sans-serif;font-size:clamp(1.4rem,2.5vw,1.8rem);font-weight:900;letter-spacing:-.8px;line-height:1.2;margin:40px 0 14px;color:var(--white)}
+.article-content h2:first-child{margin-top:0}
+.article-content p{color:rgba(244,247,255,.82);font-size:.97rem;line-height:1.8;margin-bottom:18px}
+.article-content ul,.article-content ol{margin:0 0 18px 20px;color:rgba(244,247,255,.82);font-size:.97rem;line-height:1.8}
+.article-content li{margin-bottom:8px}
+.article-content strong{color:var(--white);font-weight:700}
+.highlight-box{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--cyan);border-radius:10px;padding:20px 24px;margin:28px 0}
+.highlight-box p{margin-bottom:0;font-size:.92rem}
+
+/* COMPARE TABLE */
+.compare-table{width:100%;border-collapse:collapse;margin:28px 0;font-size:.88rem}
+.compare-table th{background:var(--card);color:var(--cyan);font-weight:700;text-align:left;padding:12px 16px;border-bottom:2px solid var(--border)}
+.compare-table td{padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(244,247,255,.8);vertical-align:top}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:90px}
+.sidebar-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 24px;margin-bottom:20px}
+.sidebar-card h3{font-family:'Raleway',sans-serif;font-weight:800;font-size:1rem;margin-bottom:16px;color:var(--white)}
+.sidebar-card ul{list-style:none;padding:0;margin:0}
+.sidebar-card ul li{border-bottom:1px solid rgba(255,255,255,.06);padding:10px 0;font-size:.85rem;color:var(--muted)}
+.sidebar-card ul li:last-child{border-bottom:none;padding-bottom:0}
+.sidebar-card ul li strong{color:var(--white);display:block;font-size:.82rem;margin-bottom:2px}
+.btn-main{background:var(--cyan);color:var(--navy);padding:14px 24px;border-radius:8px;font-weight:800;font-size:.92rem;text-decoration:none;box-shadow:0 0 24px rgba(0,170,221,.35);transition:transform .2s;display:block;text-align:center}
+.btn-main:hover{transform:translateY(-2px)}
+
+/* CTA BAND */
+.cta-band{background:linear-gradient(135deg,var(--blue) 0%,rgba(0,170,221,.4) 100%);padding:72px 5%;text-align:center;position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;inset:0;opacity:.05;background-image:linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px);background-size:54px 54px}
+.cta-band h2{font-family:'Raleway',sans-serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;margin-bottom:14px;position:relative}
+.cta-band p{color:rgba(255,255,255,.75);font-size:.95rem;margin-bottom:28px;position:relative;max-width:560px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;position:relative}
+.cta-white{background:white;color:var(--blue);padding:14px 32px;border-radius:8px;font-weight:800;text-decoration:none;font-size:.95rem;transition:transform .2s}
+.cta-white:hover{transform:translateY(-2px)}
+.cta-ghost{background:transparent;color:white;padding:14px 32px;border-radius:8px;font-weight:700;text-decoration:none;font-size:.95rem;border:1.5px solid rgba(255,255,255,.3);transition:border-color .2s}
+.cta-ghost:hover{border-color:white}
 
 /* FOOTER */
 footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding:40px 5% 28px}
 
 @media(max-width:900px){
   .nav-links{display:none}
-  .blog-grid{grid-template-columns:1fr}
-}
-@media(min-width:600px) and (max-width:900px){
-  .blog-grid{grid-template-columns:repeat(2,1fr)}
+  .article-wrap{grid-template-columns:1fr}
+  .sidebar{position:static}
+  .compare-table{font-size:.78rem}
 }
 </style>
 </head>
@@ -101,43 +130,143 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
 <!-- PAGE HERO -->
 <div class="page-hero">
   <div class="page-hero-inner">
-    <div class="breadcrumb"><a href="index.html">Accueil</a><span>›</span>Blog</div>
-    <div class="page-tag">Ressources & conseils</div>
-    <h1>Le <em>Blog</em> North IT</h1>
-    <p class="hero-desc">Guides pratiques, conseils d'expert et actualités sur la certification ITIL® 4 Foundation et la gestion des services informatiques.</p>
+    <div class="breadcrumb"><a href="index.html">Accueil</a><span>›</span><a href="blog.html">Blog</a><span>›</span>ITIL 4 vs ITIL V3</div>
+    <div class="page-tag">Comparatif</div>
+    <h1><em>ITIL 4 vs ITIL V3</em> : quelles différences ?</h1>
+    <div class="article-meta">
+      <span>Par Éric GEORGES, Formateur ITIL® Expert</span>
+      <span>7 mai 2026</span>
+      <span>Lecture : 6 min</span>
+    </div>
   </div>
 </div>
 
-<!-- ARTICLES -->
-<section class="blog-section">
-  <div class="blog-grid">
+<!-- ARTICLE -->
+<div class="article-wrap">
+  <article class="article-content">
 
-    <!-- Article 1 -->
-    <a href="blog-comment-passer-certification-itil-4-foundation.html" class="blog-card">
-      <div class="card-body">
-        <span class="card-tag">Guide pratique</span>
-        <h2 class="card-title">Comment passer la certification ITIL 4 Foundation ?</h2>
-        <p class="card-excerpt">Prérequis, format de l'examen PeopleCert, conseils d'expert pour réussir au premier passage. Tout ce qu'il faut savoir avant de se lancer.</p>
-        <div class="card-footer">
-          <span>7 mai 2026 · 5 min</span>
-          <span class="card-read">Lire l'article</span>
-        </div>
-      </div>
-    </a>
+    <h2>Introduction</h2>
+    <p>Publié en 2019, <strong>ITIL 4</strong> représente une évolution majeure par rapport à ITIL V3 (2007, révisé en 2011). Si les deux versions partagent le même objectif — aider les organisations à gérer efficacement leurs services informatiques — elles diffèrent profondément dans leur approche, leur structure et leur philosophie.</p>
+    <p>Que vous soyez déjà certifié ITIL V3 et que vous envisagiez une migration, ou que vous démarriez votre parcours ITIL, comprendre ces <strong>différences ITIL v3 v4</strong> est essentiel pour choisir la bonne voie. Voici une analyse complète.</p>
 
-    <!-- Article 2 -->
-    <a href="blog-itil4-vs-itil-v3-differences.html" class="blog-card">
-      <div class="card-body">
-        <span class="card-tag">Comparatif</span>
-        <h2 class="card-title">ITIL 4 vs ITIL V3 : quelles différences ?</h2>
-        <p class="card-excerpt">Structure, pratiques, intégration Agile/DevOps, parcours de certification : tout ce qui change entre ITIL V3 et ITIL 4, et pourquoi migrer.</p>
-        <div class="card-footer">
-          <span>7 mai 2026 · 6 min</span>
-          <span class="card-read">Lire l'article</span>
-        </div>
-      </div>
-    </a>
+    <h2>Les grandes différences entre ITIL 4 et ITIL V3</h2>
 
+    <p><strong>1. Une nouvelle structure de base</strong></p>
+    <p>ITIL V3 s'articulait autour du <strong>cycle de vie des services</strong> en cinq phases (Stratégie, Conception, Transition, Exploitation et Amélioration Continue). Cette approche linéaire convenait bien aux organisations traditionnelles, mais montrait ses limites face aux environnements agiles et aux déploiements continus.</p>
+    <p>ITIL 4 remplace ce modèle par le <strong>Système de Valeur des Services (SVS)</strong>, centré sur la chaîne de valeur des services (Service Value Chain). Ce changement marque un passage d'une logique de "cycle" à une logique de "flux de valeur" : l'objectif n'est plus de gérer des étapes séquentielles, mais de co-créer de la valeur de manière continue avec les clients et parties prenantes.</p>
+
+    <p><strong>2. Des processus aux pratiques</strong></p>
+    <p>ITIL V3 définissait <strong>26 processus</strong> relativement rigides. ITIL 4 les remplace par <strong>34 pratiques</strong>, une notion plus flexible qui reconnaît qu'une même activité peut s'organiser de multiples façons selon le contexte de l'organisation.</p>
+
+    <div class="highlight-box">
+      <p><strong>Exemple :</strong> la gestion des incidents, des problèmes et des changements existent dans les deux versions — mais ITIL 4 les encadre avec moins de prescriptions et plus d'adaptabilité, tout en intégrant nativement les concepts DevOps.</p>
+    </div>
+
+    <p><strong>3. L'intégration d'Agile, DevOps et Lean</strong></p>
+    <p>C'est l'une des <strong>nouveautés ITIL 4</strong> les plus significatives. Là où ITIL V3 était perçu comme un référentiel "waterfall", ITIL 4 a été conçu pour coexister avec Agile, DevOps, Lean et d'autres méthodes modernes. Les sept <strong>principes directeurs</strong> d'ITIL 4 (dont "Progresser de façon itérative en s'appuyant sur les retours" ou "Collaborer et promouvoir la visibilité") reflètent directement cette ouverture.</p>
+
+    <p><strong>4. Le modèle des quatre dimensions</strong></p>
+    <p>ITIL 4 introduit un modèle structurant absent d'ITIL V3 : les <strong>quatre dimensions de la gestion des services</strong>.</p>
+    <ul>
+      <li><strong>Organisations et personnes</strong> — culture, compétences, rôles</li>
+      <li><strong>Information et technologie</strong> — données, outils, systèmes</li>
+      <li><strong>Partenaires et fournisseurs</strong> — sous-traitance, écosystèmes</li>
+      <li><strong>Flux de valeur et processus</strong> — comment le travail circule</li>
+    </ul>
+    <p>Ce modèle oblige les équipes à considérer chaque service sous quatre angles complémentaires, évitant les angles morts fréquents dans les projets ITSM.</p>
+
+    <p><strong>5. Un parcours de certification reconfiguré</strong></p>
+    <p>ITIL V3 proposait cinq niveaux : Foundation, Intermediate (avec de nombreux modules), Expert et Master. La <strong>migration ITIL v3 vers v4</strong> s'accompagne d'un nouveau parcours : Foundation → Managing Professional (MP) → Strategic Leader (SL) → Master ITIL. Ce chemin est plus lisible et mieux aligné sur les rôles professionnels réels.</p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Critère</th>
+          <th>ITIL V3</th>
+          <th>ITIL 4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Structure de base</td>
+          <td>Cycle de vie des services (5 phases)</td>
+          <td>Système de Valeur des Services (SVS)</td>
+        </tr>
+        <tr>
+          <td>Processus / Pratiques</td>
+          <td>26 processus</td>
+          <td>34 pratiques</td>
+        </tr>
+        <tr>
+          <td>Agilité / DevOps</td>
+          <td>Non intégrés</td>
+          <td>Natifs dans le référentiel</td>
+        </tr>
+        <tr>
+          <td>Principes directeurs</td>
+          <td>Absents</td>
+          <td>7 principes directeurs</td>
+        </tr>
+        <tr>
+          <td>Focus</td>
+          <td>Gestion IT interne</td>
+          <td>Co-création de valeur métier</td>
+        </tr>
+        <tr>
+          <td>Certification de base</td>
+          <td>ITIL V3 Foundation</td>
+          <td>ITIL 4 Foundation</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Pourquoi migrer vers ITIL 4 ?</h2>
+    <p>La question se pose naturellement pour les professionnels certifiés ITIL V3 : est-il vraiment nécessaire de migrer ? La réponse est oui, pour plusieurs raisons concrètes.</p>
+    <p><strong>Le marché du travail a basculé.</strong> Les offres d'emploi mentionnent de plus en plus explicitement "ITIL 4" plutôt qu'ITIL V3. Les DSI qui renouvellent leurs pratiques ITSM s'appuient sur le référentiel ITIL 4, et les responsables recruteurs savent désormais faire la différence entre les deux certifications.</p>
+    <p><strong>ITIL V3 n'évolue plus.</strong> AXELOS (désormais PeopleCert) a cessé de développer de nouveaux contenus pour ITIL V3. Les modules Intermediate V3 existent encore, mais la dynamique de la communauté, des publications et des mises à jour est entièrement du côté d'ITIL 4.</p>
+    <p><strong>La passerelle est accessible.</strong> Si vous êtes déjà certifié ITIL V3 Foundation (ou Expert), vous pouvez passer directement l'examen ITIL 4 Foundation sans reprendre tout à zéro. Une formation de 3 jours suffit pour maîtriser les nouveaux concepts et réussir l'examen PeopleCert.</p>
+    <p><strong>ITIL 4 correspond aux enjeux actuels.</strong> Transformation digitale, cloud, DevOps, organisation produit : les entreprises d'aujourd'hui ne ressemblent plus à celles de 2007. ITIL 4 a été conçu pour cet environnement, avec un langage et des concepts adaptés aux équipes modernes.</p>
+
+    <h2>Conclusion</h2>
+    <p>La comparaison <strong>ITIL 4 vs ITIL V3</strong> ne se résume pas à un simple changement de version : c'est une modernisation en profondeur d'un référentiel qui devait s'adapter au rythme du secteur IT. ITIL 4 est plus flexible, plus ouvert aux pratiques agiles, et davantage orienté vers la valeur métier.</p>
+    <p>Que vous soyez nouveau venu dans l'univers ITIL ou professionnel en reconversion, la <strong>certification ITIL 4 Foundation</strong> est le premier pas incontournable — et le plus accessible — de ce parcours.</p>
+
+  </article>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <h3>ITIL 4 vs V3 en bref</h3>
+      <ul>
+        <li><strong>Structure ITIL V3</strong>Cycle de vie 5 phases</li>
+        <li><strong>Structure ITIL 4</strong>Système de Valeur des Services</li>
+        <li><strong>Processus V3</strong>26 processus</li>
+        <li><strong>Pratiques ITIL 4</strong>34 pratiques</li>
+        <li><strong>Agile / DevOps</strong>Intégrés dans ITIL 4</li>
+        <li><strong>Certification entrée</strong>ITIL 4 Foundation</li>
+      </ul>
+    </div>
+    <div class="sidebar-card">
+      <h3>Se certifier ITIL 4</h3>
+      <ul>
+        <li><strong>Durée</strong>3 jours (21h)</li>
+        <li><strong>Format</strong>100% distanciel</li>
+        <li><strong>Certification incluse</strong>Voucher PeopleCert</li>
+        <li><strong>Taux de réussite</strong>&gt; 95%</li>
+        <li><strong>Tarif</strong>1 700 €</li>
+      </ul>
+      <a href="formation.html" class="btn-main" style="margin-top:20px">Voir la formation</a>
+    </div>
+  </aside>
+</div>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <h2>Passez à <em style="color:var(--cyan);font-style:normal">ITIL 4</em> avec un expert</h2>
+  <p>Formation de 3 jours, 100 % distancielle, avec certification PeopleCert incluse. Certifiés ITIL V3 bienvenus.</p>
+  <div class="cta-btns">
+    <a href="formation.html" class="cta-white">Voir les prochaines sessions</a>
+    <a href="contact.html" class="cta-ghost">Demander un devis</a>
   </div>
 </section>
 
