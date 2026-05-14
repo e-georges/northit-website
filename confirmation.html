@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Demande reçue — North IT</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#07102A;--cyan:#00AADD;--white:#F4F7FF;--muted:#8A9BC4;--green:#22c55e;--border:rgba(0,170,221,.15)}
+body{font-family:'Nunito Sans',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 5%;text-align:center}
+.check{font-size:4rem;margin-bottom:24px;animation:pop .4s ease-out}
+@keyframes pop{0%{transform:scale(0)}80%{transform:scale(1.15)}100%{transform:scale(1)}}
+h1{font-family:'Raleway',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;letter-spacing:-1px;margin-bottom:16px}
+h1 em{color:var(--cyan);font-style:normal}
+p{color:var(--muted);font-size:.95rem;line-height:1.75;max-width:480px;margin:0 auto 32px}
+.steps{display:flex;flex-direction:column;gap:12px;max-width:400px;margin:0 auto 40px;text-align:left}
+.step{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:14px 18px}
+.step-num{width:28px;height:28px;border-radius:6px;background:rgba(0,170,221,.15);border:1px solid rgba(0,170,221,.3);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:var(--cyan);flex-shrink:0}
+.step-text{font-size:.85rem;color:rgba(244,247,255,.8);line-height:1.5}
+.step-text strong{color:var(--white);display:block;margin-bottom:2px}
+.btn{display:inline-block;background:var(--cyan);color:var(--navy);padding:13px 32px;border-radius:8px;font-family:'Raleway',sans-serif;font-weight:900;text-decoration:none;font-size:.95rem;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.btn-ghost{display:inline-block;color:var(--cyan);padding:13px 24px;font-weight:600;text-decoration:none;font-size:.88rem}
+</style>
+</head>
+<body>
+
+<div class="check">✅</div>
+<h1>Demande reçue,<br><em>merci !</em></h1>
+<p>Votre demande d'inscription a bien été enregistrée. Vous recevrez une confirmation et une facture pro forma par e-mail <strong>sous 48h</strong>.</p>
+
+<div class="steps">
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-text"><strong>Confirmation par e-mail</strong>Sous 48h, avec le récapitulatif de votre inscription et la facture pro forma.</div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-text"><strong>Lien de connexion</strong>La veille de la session, vous recevrez le lien de connexion à la classe virtuelle.</div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-text"><strong>Accès aux supports</strong>Les supports de cours officiels vous seront transmis avant le démarrage de la formation.</div>
+  </div>
+</div>
+
+<div>
+  <a href="formation.html" class="btn">Voir le programme complet</a>
+  <a href="index.html" class="btn-ghost">Retour à l'accueil →</a>
+</div>
+
+</body>
+</html>

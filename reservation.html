@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Réserver ma place — Formation ITIL® 4 Foundation | North IT</title>
+<meta name="description" content="Réservez votre place à la prochaine session ITIL® 4 Foundation de North IT. Formation distanciel, certification PeopleCert incluse, 1 700 € HT."/>
+<meta name="robots" content="noindex, follow"/>
+<link rel="canonical" href="https://northit.fr/reservation.html"/>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700;800;900&family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#07102A;--deep:#0B1A3E;--blue:#1446A0;--cyan:#00AADD;
+  --white:#F4F7FF;--muted:#8A9BC4;--card:#0F1F4A;--border:rgba(0,170,221,.15);
+  --green:#22c55e;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito Sans',sans-serif;background:var(--navy);color:var(--white);line-height:1.65;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:70px;background:rgba(7,16,42,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{color:rgba(244,247,255,.65);text-decoration:none;font-size:.88rem;font-weight:600;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{background:var(--cyan)!important;color:var(--navy)!important;padding:9px 22px;border-radius:6px;font-weight:700!important}
+
+/* PAGE */
+.page-hero{padding:120px 5% 56px;background:linear-gradient(135deg,var(--deep) 0%,rgba(20,70,160,.3) 100%);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;opacity:.04;background-image:linear-gradient(rgba(0,170,221,1) 1px,transparent 1px),linear-gradient(90deg,rgba(0,170,221,1) 1px,transparent 1px);background-size:54px 54px}
+.page-hero-inner{position:relative;z-index:1;max-width:640px}
+.breadcrumb{font-size:.78rem;color:var(--muted);margin-bottom:16px}
+.breadcrumb a{color:var(--cyan);text-decoration:none}
+.breadcrumb span{margin:0 8px;opacity:.4}
+.page-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(0,170,221,.1);border:1px solid rgba(0,170,221,.25);border-radius:100px;padding:5px 16px;font-size:.75rem;font-weight:700;color:var(--cyan);margin-bottom:20px;text-transform:uppercase;letter-spacing:.5px}
+h1{font-family:'Raleway',sans-serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;line-height:1.1;letter-spacing:-1.5px;margin-bottom:14px}
+h1 em{color:var(--cyan);font-style:normal}
+.hero-desc{color:var(--muted);font-size:.93rem;line-height:1.75}
+
+/* FORM SECTION */
+.form-section{padding:64px 5%;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:56px;align-items:start}
+
+/* FORM */
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px 32px}
+.form-card h2{font-family:'Raleway',sans-serif;font-size:1.2rem;font-weight:900;margin-bottom:6px;letter-spacing:-.5px}
+.form-card .sub{font-size:.83rem;color:var(--muted);margin-bottom:28px;line-height:1.6}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-group{margin-bottom:16px}
+label{display:block;font-size:.82rem;font-weight:700;color:var(--muted);margin-bottom:6px;letter-spacing:.3px}
+label span{color:#f87171;margin-left:2px}
+input,select,textarea{
+  width:100%;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:8px;
+  padding:11px 14px;
+  color:var(--white);
+  font-family:'Nunito Sans',sans-serif;
+  font-size:.9rem;
+  transition:border-color .2s, background .2s;
+  appearance:none;
+}
+input:focus,select:focus,textarea:focus{
+  outline:none;
+  border-color:var(--cyan);
+  background:rgba(0,170,221,.05);
+}
+input::placeholder,textarea::placeholder{color:rgba(138,155,196,.5)}
+select option{background:var(--deep);color:var(--white)}
+textarea{resize:vertical;min-height:100px;line-height:1.6}
+
+.btn-submit{
+  width:100%;
+  background:var(--cyan);
+  color:var(--navy);
+  border:none;
+  border-radius:8px;
+  padding:14px;
+  font-family:'Raleway',sans-serif;
+  font-weight:900;
+  font-size:1rem;
+  cursor:pointer;
+  transition:opacity .2s, transform .2s;
+  margin-top:8px;
+}
+.btn-submit:hover{opacity:.88;transform:translateY(-1px)}
+.form-note{font-size:.75rem;color:var(--muted);text-align:center;margin-top:12px;line-height:1.6}
+
+/* SIDEBAR */
+.side-info{display:flex;flex-direction:column;gap:16px;position:sticky;top:90px}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px}
+.info-card-title{font-family:'Raleway',sans-serif;font-size:.88rem;font-weight:800;color:var(--cyan);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.info-row{display:flex;gap:10px;font-size:.84rem;margin-bottom:10px;align-items:flex-start}
+.info-row:last-child{margin-bottom:0}
+.info-key{color:var(--muted);font-weight:600;width:90px;flex-shrink:0}
+.info-val{color:var(--white);font-weight:700}
+.price-display{text-align:center;padding:16px 0 8px}
+.price-display .amount{font-family:'Raleway',sans-serif;font-size:2.2rem;font-weight:900;color:var(--cyan);line-height:1}
+.price-display .mention{font-size:.72rem;color:var(--muted);margin-top:4px}
+.guarantee-card{background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:18px}
+.guarantee-card .g-title{font-size:.82rem;font-weight:800;color:var(--green);margin-bottom:10px}
+.guarantee-item{display:flex;align-items:flex-start;gap:8px;font-size:.78rem;color:rgba(244,247,255,.75);margin-bottom:7px;line-height:1.5}
+.guarantee-item:last-child{margin-bottom:0}
+.g-check{color:var(--green);font-weight:900;flex-shrink:0}
+
+/* FOOTER */
+footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding:32px 5% 24px;margin-top:80px}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.75rem;color:rgba(244,247,255,.3);max-width:1100px;margin:0 auto}
+.foot-bottom a{color:rgba(244,247,255,.3);text-decoration:none}
+.foot-bottom a:hover{color:var(--cyan)}
+
+@media(max-width:900px){
+  .nav-links{display:none}
+  .form-section{grid-template-columns:1fr}
+  .side-info{position:static}
+  .form-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html"><img src="images/index_00_785b8f87.webp" alt="North IT" style="height:48px"/></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="itil-v5.html">ITIL® V5</a></li>
+    <li><a href="formation.html">Notre formation</a></li>
+    <li><a href="references.html">Références</a></li>
+    <li><a href="about.html">Qui sommes-nous ?</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html" class="nav-cta">Nous contacter</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Accueil</a><span>›</span>
+      <a href="formation.html">Notre formation</a><span>›</span>
+      Réservation
+    </div>
+    <div class="page-tag">Inscription</div>
+    <h1>Réserver ma place<br><em>ITIL® 4 Foundation</em></h1>
+    <p class="hero-desc">Remplissez le formulaire ci-dessous. Vous recevrez une confirmation et une facture pro forma sous 48h.</p>
+  </div>
+</div>
+
+<!-- FORM + SIDEBAR -->
+<div class="form-section">
+
+  <!-- FORMULAIRE -->
+  <div class="form-card">
+    <h2>Votre demande d'inscription</h2>
+    <p class="sub">Tous les champs sont obligatoires. Votre demande sera traitée sous 24h.</p>
+
+    <form
+      name="reservation"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      action="/confirmation.html">
+
+      <input type="hidden" name="form-name" value="reservation"/>
+      <p style="display:none"><input name="bot-field"/></p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="prenom">Prénom <span>*</span></label>
+          <input id="prenom" name="prenom" type="text" required placeholder="Marie"/>
+        </div>
+        <div class="form-group">
+          <label for="nom">Nom <span>*</span></label>
+          <input id="nom" name="nom" type="text" required placeholder="Dupont"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-mail professionnel <span>*</span></label>
+        <input id="email" name="email" type="email" required placeholder="marie.dupont@entreprise.fr"/>
+      </div>
+
+      <div class="form-group">
+        <label for="societe">Société <span>*</span></label>
+        <input id="societe" name="societe" type="text" required placeholder="Capgemini"/>
+      </div>
+
+      <div class="form-group">
+        <label for="poste">Poste occupé <span>*</span></label>
+        <input id="poste" name="poste" type="text" required placeholder="Responsable IT / Administrateur systèmes…"/>
+      </div>
+
+      <div class="form-group">
+        <label for="session">Session souhaitée <span>*</span></label>
+        <select id="session" name="session" required>
+          <option value="">— Choisissez une date —</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Votre message <span>*</span></label>
+        <textarea id="message" name="message" required placeholder="Précisez vos attentes, le contexte de votre inscription, toute information utile…"></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">Envoyer ma demande →</button>
+      <p class="form-note">Confirmation par e-mail sous 48h · Facture pro forma envoyée dès validation</p>
+
+    </form>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="side-info">
+
+    <div class="info-card">
+      <div class="info-card-title">📋 Rappel formation</div>
+      <div class="info-row"><span class="info-key">Durée</span><span class="info-val">3 jours · 21h</span></div>
+      <div class="info-row"><span class="info-key">Format</span><span class="info-val">Distanciel</span></div>
+      <div class="info-row"><span class="info-key">Groupe</span><span class="info-val">12 participants max.</span></div>
+      <div class="info-row"><span class="info-key">Fréquence</span><span class="info-val">1 session / mois</span></div>
+      <div class="info-row"><span class="info-key">Certif.</span><span class="info-val">PeopleCert incluse</span></div>
+      <div class="price-display">
+        <div class="amount">1 700 €</div>
+        <div class="mention">HT · tout inclus · certification comprise</div>
+      </div>
+    </div>
+
+    <div class="guarantee-card">
+      <div class="g-title">✔ Ce qui est inclus</div>
+      <div class="guarantee-item"><span class="g-check">✓</span> Certification PeopleCert officielle</div>
+      <div class="guarantee-item"><span class="g-check">✓</span> Supports de cours officiels</div>
+      <div class="guarantee-item"><span class="g-check">✓</span> Examen blanc complet (40 QCM)</div>
+      <div class="guarantee-item"><span class="g-check">✓</span> Formateur expert · 16 ans d'expérience</div>
+      <div class="guarantee-item"><span class="g-check">✓</span> Suivi post-formation</div>
+    </div>
+
+    <div class="info-card" style="text-align:center">
+      <div style="font-size:.78rem;color:var(--muted);margin-bottom:4px">Taux de réussite</div>
+      <div style="font-family:'Raleway',sans-serif;font-size:2rem;font-weight:900;color:var(--green)">&gt;95%</div>
+      <div style="font-size:.75rem;color:var(--muted);margin-top:4px">à la certification PeopleCert</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-bottom">
+    <span>© 2025 North IT. Tous droits réservés. ITIL® est une marque déposée d'AXELOS Limited.</span>
+    <a href="termes.html">Termes et conditions</a>
+  </div>
+</footer>
+
+<script>
+function getLastMonday(year, month) {
+  let day = new Date(year, month + 1, 0).getDate();
+  while (new Date(year, month, day).getDay() !== 1) day--;
+  return new Date(year, month, day);
+}
+
+function buildSessionOptions() {
+  const now = new Date();
+  const sessions = [];
+  let y = now.getFullYear(), m = now.getMonth();
+  const months = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+  const fullMonths = [6]; // juillet = index 6 → complet
+
+  while (sessions.length < 5) {
+    const lundi = getLastMonday(y, m);
+    const mercredi = new Date(lundi);
+    mercredi.setDate(lundi.getDate() + 2);
+    if (mercredi > now) {
+      sessions.push({ lundi, mercredi, month: m, year: y, full: fullMonths.includes(m) });
+    }
+    m++; if (m > 11) { m = 0; y++; }
+  }
+
+  const select = document.getElementById('session');
+  sessions.forEach(s => {
+    const label = `${s.lundi.getDate()} – ${s.mercredi.getDate()} ${months[s.month]} ${s.year}${s.full ? ' (Complet)' : ''}`;
+    const opt = document.createElement('option');
+    opt.value = label;
+    opt.textContent = label;
+    if (s.full) opt.disabled = true;
+    select.appendChild(opt);
+  });
+
+  const intra = document.createElement('option');
+  intra.value = 'Intra-entreprise – sur devis';
+  intra.textContent = 'Intra-entreprise – sur devis';
+  select.appendChild(intra);
+}
+
+buildSessionOptions();
+</script>
+</body>
+</html>
