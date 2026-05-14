@@ -122,6 +122,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
   .foot-grid{grid-template-columns:1fr}
 }
 </style>
+<script src="https://www.google.com/recaptcha/api.js?render=6Lc_SITE_KEY_REELLE"></script>
 </head>
 <body>
 
@@ -219,10 +220,10 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
           <label for="session">Session souhaitée</label>
           <select id="session" name="session">
               <option value="">Sélectionner une session...</option>
-              <option value="27 – 29 avril 2026" disabled>27 – 29 avril 2026 — COMPLET — COMPLET</option>
+              <option value="27 – 29 avril 2026" disabled>27 – 29 avril 2026 — COMPLET</option>
               <option value="25 – 27 mai 2026">25 – 27 mai 2026</option>
               <option value="29 – 1 juin 2026">29 – 1 juin 2026</option>
-              <option value="27 – 29 juillet 2026">27 – 29 juillet 2026</option>
+              <option value="27 – 29 juillet 2026" disabled>27 – 29 juillet 2026 — COMPLET</option>
               <option value="31 – 2 août 2026">31 – 2 août 2026</option>
               <option value="28 – 30 septembre 2026">28 – 30 septembre 2026</option>
             </select>
@@ -345,27 +346,29 @@ document.querySelectorAll('input[name="type_demande"]').forEach(function(r) {
 });
 
 // Formspree AJAX submission
-document.getElementById('contactForm').addEventListener('submit', function(e) {
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   var btn = this.querySelector('.btn-submit');
   btn.textContent = 'Envoi en cours...';
   btn.disabled = true;
-  fetch(this.action, {
-    method: 'POST',
-    body: new FormData(this),
-    headers: {'Accept': 'application/json'}
-  }).then(function(response) {
+  try {
+    const token = await grecaptcha.execute('6Lc_SITE_KEY_REELLE', {action: 'submit'});
+    const fd = new FormData(this);
+    fd.append('g-recaptcha-response', token);
+    const response = await fetch(this.action, {
+      method: 'POST',
+      body: fd,
+      headers: {'Accept': 'application/json'}
+    });
     if (response.ok) {
       document.getElementById('contactForm').style.display = 'none';
       document.getElementById('successMsg').style.display = 'block';
-    } else {
-      throw new Error('Erreur');
-    }
-  }).catch(function() {
+    } else { throw new Error('Erreur'); }
+  } catch(err) {
     btn.textContent = 'Envoyer ma demande →';
     btn.disabled = false;
     alert('Une erreur est survenue. Contactez-nous directement : e.georges@northit.fr');
-  });
+  }
 });
 </script><script>
 function getLastMonday(year, month) {
@@ -388,25 +391,4 @@ while (sessions.length < 5) {
 const ps = sessions[0];
 document.getElementById('prochaineSession').innerHTML =
   '<strong style="color:var(--white)">' + ps.lundi.getDate() + ' – ' + ps.mercredi.getDate() + ' ' + months[ps.m] + ' ' + ps.y + '</strong><br>Lundi au mercredi · Places limitées à 12';
-
-document.querySelectorAll('input[name="type_demande"]').forEach(r => {
-  r.addEventListener('change', () => {
-    document.getElementById('nbParticipantsGroup').style.display = r.value === 'Intra-entreprise' ? 'block' : 'none';
-    document.getElementById('sessionGroup').style.display = r.value === 'Intra-entreprise' ? 'none' : 'block';
-  });
-});
-
-// Formspree AJAX submission
-document.getElementById('contactForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const btn = this.querySelector('.btn-submit');
-  btn.textContent = 'Envoi en cours...';
-  btn.disabled = true;
-  try {
-    const response = await fetch(this.action, {
-      method: 'POST',
-      body: new FormData(this),
-      headers: {'Accept': 'application/json'}
-    });
-    if (response.ok) {
-      this.styl
+</script>
