@@ -3,603 +3,469 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Espace Apprenant | North IT – Formation ITIL® 4 Foundation</title>
+<title>Espace Apprenant | North IT</title>
 <meta name="robots" content="noindex, nofollow"/>
 <link rel="preconnect" href="https://api.fontshare.com"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,800,900&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-
-<!-- Supabase JS -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --amber:#E8930A;
-  --amber-bg:rgba(232,147,10,.09);
-  --amber-bd:rgba(232,147,10,.22);
-  --navy:#07102A;
-  --text:#1A2B4A;
-  --muted:#5A6B8A;
-  --border:#E0E5EF;
-  --bg:#F5F7FC;
-  --white:#FFFFFF;
-  --green:#16A34A;
-  --red:#DC2626;
-  --red-bg:#FEF2F2;
-  --shadow:0 2px 8px rgba(10,22,40,.07);
-  --shadow-md:0 4px 20px rgba(10,22,40,.11);
-}
+:root{--amber:#E8930A;--ambg:rgba(232,147,10,.09);--ambd:rgba(232,147,10,.22);--navy:#07102A;--text:#1A2B4A;--muted:#5A6B8A;--bd:#E0E5EF;--bg:#F5F7FC;--wh:#fff;--green:#16A34A;--red:#DC2626;--sh:0 2px 8px rgba(10,22,40,.07);--shm:0 4px 20px rgba(10,22,40,.12)}
 html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;min-height:100vh;font-size:16px}
-
-/* ─── TOPBAR ─── */
-.topbar{
-  background:var(--white);border-bottom:1px solid var(--border);
-  padding:0 40px;height:64px;
-  display:flex;align-items:center;justify-content:space-between;
-  box-shadow:0 1px 6px rgba(10,22,40,.06);
-  position:sticky;top:0;z-index:100;
-}
-.topbar-logo{font-family:'Satoshi',sans-serif;font-weight:900;font-size:1.4rem;color:var(--text);text-decoration:none;letter-spacing:-.5px}
-.topbar-logo a{color:inherit;text-decoration:none}
-.topbar-right{display:flex;align-items:center;gap:14px}
-.user-pill{background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:100px;padding:5px 14px;font-size:.78rem;font-weight:600;color:var(--amber);display:none}
-.btn-logout{background:transparent;border:1.5px solid var(--border);color:var(--muted);padding:7px 16px;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;display:none}
-.btn-logout:hover{border-color:var(--red);color:var(--red)}
-
-/* ─── ÉCRAN LOGIN ─── */
-.screen-login{min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;padding:40px 20px}
-.login-card{
-  background:var(--white);border:1px solid var(--border);border-radius:16px;
-  padding:40px;width:100%;max-width:420px;
-  box-shadow:var(--shadow-md);position:relative;overflow:hidden;
-}
-.login-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber)}
-.login-brand{font-family:'Satoshi',sans-serif;font-weight:900;font-size:1.5rem;color:var(--text);letter-spacing:-.4px;margin-bottom:2px}
-.login-sub{font-size:.8rem;color:var(--muted);margin-bottom:28px}
-.login-divider{width:40px;height:2px;background:var(--amber);margin:0 0 24px}
-.login-title{font-family:'Satoshi',sans-serif;font-weight:800;font-size:1.2rem;color:var(--text);margin-bottom:6px}
-.login-desc{font-size:.85rem;color:var(--muted);line-height:1.65;margin-bottom:26px}
-
-.form-group{margin-bottom:16px}
-.form-label{display:block;font-size:.8rem;font-weight:700;color:var(--muted);margin-bottom:6px;letter-spacing:.2px}
-.form-input{
-  width:100%;background:var(--bg);
-  border:1.5px solid var(--border);border-radius:8px;
-  padding:11px 14px;color:var(--text);font-family:inherit;font-size:.92rem;
-  transition:border-color .2s,background .2s;
-}
-.form-input:focus{outline:none;border-color:var(--amber);background:var(--white)}
-.form-input.error{border-color:var(--red);background:var(--red-bg)}
-
-.btn-primary{
-  width:100%;background:var(--amber);color:var(--white);
-  border:none;padding:13px;border-radius:8px;
-  font-weight:800;font-size:.95rem;cursor:pointer;font-family:inherit;
-  transition:background .2s,transform .15s;
-  box-shadow:0 2px 12px rgba(232,147,10,.3);
-  margin-top:4px;
-}
-.btn-primary:hover{background:#D4820A;transform:translateY(-1px)}
-.btn-primary:disabled{opacity:.6;cursor:not-allowed;transform:none}
-
-.btn-secondary{
-  width:100%;background:transparent;color:var(--muted);
-  border:1.5px solid var(--border);padding:11px;border-radius:8px;
-  font-weight:600;font-size:.88rem;cursor:pointer;font-family:inherit;
-  transition:all .2s;margin-top:8px;
-}
-.btn-secondary:hover{border-color:var(--amber);color:var(--amber)}
-
-.error-msg{
-  background:var(--red-bg);border:1px solid #FECACA;border-radius:8px;
-  padding:10px 14px;font-size:.82rem;color:var(--red);margin-top:12px;
-  display:none;line-height:1.5;
-}
-.success-msg{
-  background:#F0FDF4;border:1px solid #BBF7D0;border-radius:8px;
-  padding:10px 14px;font-size:.82rem;color:var(--green);margin-top:12px;
-  display:none;line-height:1.5;
-}
-.link-btn{
-  background:none;border:none;color:var(--amber);font-size:.8rem;
-  font-weight:600;cursor:pointer;font-family:inherit;padding:0;
-  text-decoration:underline;text-underline-offset:3px;
-}
-.login-footer{text-align:center;margin-top:18px;font-size:.75rem;color:var(--muted)}
-.login-security{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:14px;font-size:.72rem;color:var(--muted)}
-
-/* ─── ÉCRAN DÉFINIR MOT DE PASSE (1ère connexion) ─── */
-.screen-setpass{min-height:calc(100vh - 64px);display:none;align-items:center;justify-content:center;padding:40px 20px}
-.setpass-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:40px;width:100%;max-width:420px;box-shadow:var(--shadow-md);position:relative;overflow:hidden}
-.setpass-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--green)}
-
-/* ─── ÉCRAN CONTENU ─── */
-.screen-content{display:none;flex-direction:column}
-.main{max-width:900px;margin:0 auto;padding:32px 40px;width:100%}
-
-.welcome-banner{
-  background:var(--white);border:1px solid var(--border);
-  border-radius:12px;padding:20px 24px;
-  margin-bottom:24px;display:flex;align-items:flex-start;gap:14px;
-  box-shadow:var(--shadow);
-}
-.welcome-icon{font-size:2rem;flex-shrink:0;margin-top:2px}
-.welcome-text h2{font-family:'Satoshi',sans-serif;font-size:1.05rem;font-weight:800;color:var(--text);margin-bottom:4px}
-.welcome-text p{font-size:.83rem;color:var(--muted);line-height:1.6}
-
-.stats-row{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
-.stat-chip{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:9px 16px;font-size:.78rem;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow)}
-.stat-chip strong{font-family:'Satoshi',sans-serif;font-weight:800;color:var(--text)}
-.stat-chip span{color:var(--muted)}
-
-.category-block{margin-bottom:24px}
-.category-label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
-
-.doc-list{display:flex;flex-direction:column;gap:8px}
-.doc-card{
-  background:var(--white);border:1px solid var(--border);border-radius:10px;
-  padding:14px 18px;display:flex;align-items:center;gap:14px;
-  box-shadow:var(--shadow);transition:all .2s;
-}
-.doc-card.available:hover{border-color:var(--amber-bd);box-shadow:var(--shadow-md);transform:translateY(-1px)}
-.doc-card.locked{background:var(--bg);opacity:.7}
-
-.doc-icon{
-  width:42px;height:42px;border-radius:9px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.3rem;flex-shrink:0;
-}
-.doc-icon.pdf{background:#FEF2F2}
-.doc-icon.excel{background:#F0FDF4}
-.doc-icon.lock{background:var(--bg);border:1px solid var(--border)}
-
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:16px;line-height:1.6}
+/* topbar */
+.topbar{background:var(--wh);border-bottom:1px solid var(--bd);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;box-shadow:0 1px 6px rgba(10,22,40,.06);position:sticky;top:0;z-index:100}
+.logo{font-family:'Satoshi',sans-serif;font-weight:900;font-size:1.4rem;letter-spacing:-.5px;color:var(--text);text-decoration:none}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.user-pill{background:var(--ambg);border:1px solid var(--ambd);border-radius:100px;padding:4px 14px;font-size:.78rem;font-weight:600;color:var(--amber);display:none}
+.btn-sm{background:transparent;border:1.5px solid var(--bd);color:var(--muted);padding:6px 14px;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;display:none}
+.btn-sm:hover{border-color:var(--red);color:var(--red)}
+/* screens */
+.screen{min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.screen.hidden{display:none}
+.card{background:var(--wh);border:1px solid var(--bd);border-radius:16px;padding:40px;width:100%;max-width:420px;box-shadow:var(--shm);position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber)}
+.brand{font-family:'Satoshi',sans-serif;font-weight:900;font-size:1.5rem;letter-spacing:-.4px;color:var(--text);margin-bottom:2px}
+.brand-sub{font-size:.8rem;color:var(--muted);margin-bottom:20px}
+.divider{width:36px;height:2px;background:var(--amber);margin-bottom:20px}
+.card-title{font-family:'Satoshi',sans-serif;font-weight:800;font-size:1.15rem;margin-bottom:6px}
+.card-desc{font-size:.85rem;color:var(--muted);line-height:1.65;margin-bottom:24px}
+/* form */
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:5px}
+.fg input{width:100%;background:var(--bg);border:1.5px solid var(--bd);border-radius:8px;padding:10px 13px;font-family:inherit;font-size:.92rem;color:var(--text);transition:border-color .2s}
+.fg input:focus{outline:none;border-color:var(--amber);background:var(--wh)}
+.fg input.err{border-color:var(--red)}
+.btn-primary{width:100%;background:var(--amber);color:var(--wh);border:none;padding:13px;border-radius:8px;font-weight:800;font-size:.95rem;cursor:pointer;font-family:inherit;transition:background .2s;box-shadow:0 2px 12px rgba(232,147,10,.3);margin-top:4px}
+.btn-primary:hover{background:#D4820A}
+.btn-primary:disabled{opacity:.6;cursor:not-allowed}
+.btn-link{background:none;border:none;color:var(--amber);font-size:.8rem;font-weight:600;cursor:pointer;padding:0;font-family:inherit;text-decoration:underline;text-underline-offset:3px;margin-top:10px;display:block;text-align:center}
+.msg{border-radius:8px;padding:10px 13px;font-size:.82rem;margin-top:10px;line-height:1.5;display:none}
+.msg.err{background:#FEF2F2;border:1px solid #FECACA;color:var(--red)}
+.msg.ok{background:#F0FDF4;border:1px solid #BBF7D0;color:var(--green)}
+.note{font-size:.73rem;color:var(--muted);text-align:center;margin-top:14px;line-height:1.6}
+/* QR */
+.qr-box{background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:16px;text-align:center;margin-bottom:16px}
+.qr-box img,.qr-box svg{max-width:180px;height:auto}
+.secret-box{font-family:monospace;font-size:.82rem;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 12px;word-break:break-all;color:var(--muted);margin-top:8px}
+/* content */
+.content-wrap{max-width:860px;margin:0 auto;padding:32px 40px;display:none}
+.welcome{background:var(--wh);border:1px solid var(--bd);border-radius:12px;padding:20px 24px;margin-bottom:22px;display:flex;gap:14px;align-items:flex-start;box-shadow:var(--sh)}
+.welcome-icon{font-size:2rem}
+.welcome h2{font-family:'Satoshi',sans-serif;font-weight:800;font-size:1.05rem;margin-bottom:4px}
+.welcome p{font-size:.83rem;color:var(--muted)}
+/* docs */
+.cat-label{font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--muted);padding-bottom:8px;border-bottom:1px solid var(--bd);margin-bottom:10px}
+.doc-list{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.doc-card{background:var(--wh);border:1px solid var(--bd);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:14px;box-shadow:var(--sh);transition:all .2s}
+.doc-card.avail:hover{border-color:var(--ambd);box-shadow:var(--shm);transform:translateY(-1px)}
+.doc-card.locked{background:var(--bg);opacity:.65}
+.doc-icon{width:42px;height:42px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.doc-icon.pdf{background:#FEF2F2}.doc-icon.excel{background:#F0FDF4}.doc-icon.lock{background:var(--bg);border:1px solid var(--bd)}
 .doc-info{flex:1;min-width:0}
-.doc-name{font-family:'Satoshi',sans-serif;font-weight:800;font-size:.88rem;color:var(--text);margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.doc-desc{font-size:.76rem;color:var(--muted);line-height:1.4;margin-bottom:4px}
-.doc-badges{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.badge{font-size:.65rem;font-weight:700;text-transform:uppercase;padding:2px 7px;border-radius:4px;letter-spacing:.3px}
+.doc-name{font-family:'Satoshi',sans-serif;font-weight:800;font-size:.88rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.doc-desc{font-size:.75rem;color:var(--muted);margin-top:2px}
+.doc-meta{display:flex;gap:6px;margin-top:4px}
+.badge{font-size:.65rem;font-weight:700;text-transform:uppercase;padding:2px 7px;border-radius:4px}
 .badge.pdf{background:#FEF2F2;color:var(--red);border:1px solid #FECACA}
 .badge.excel{background:#F0FDF4;color:var(--green);border:1px solid #BBF7D0}
-.badge.size{background:var(--bg);color:var(--muted);border:1px solid var(--border)}
-
-.btn-download{
-  background:var(--amber);color:var(--white);
-  border:none;padding:8px 16px;border-radius:7px;
-  font-size:.78rem;font-weight:700;cursor:pointer;
-  text-decoration:none;display:inline-flex;align-items:center;gap:5px;
-  white-space:nowrap;transition:background .2s;font-family:inherit;
-  flex-shrink:0;
-}
-.btn-download:hover{background:#D4820A}
-.badge-soon{
-  background:var(--bg);border:1px solid var(--border);
-  color:var(--muted);padding:7px 14px;border-radius:7px;
-  font-size:.76rem;font-weight:600;white-space:nowrap;flex-shrink:0;
-}
-
-.empty-state{text-align:center;padding:56px 20px}
-.empty-state .e-icon{font-size:3rem;margin-bottom:14px}
-.empty-state h3{font-family:'Satoshi',sans-serif;font-weight:800;font-size:1rem;color:var(--text);margin-bottom:6px}
-.empty-state p{font-size:.85rem;color:var(--muted);max-width:320px;margin:0 auto;line-height:1.7}
-
-.loading-state{text-align:center;padding:60px;color:var(--muted);font-size:.88rem}
-
-.portal-footer{
-  text-align:center;padding:20px 40px;
-  font-size:.73rem;color:var(--muted);
-  border-top:1px solid var(--border);margin-top:32px;
-}
-.portal-footer a{color:var(--amber);text-decoration:none}
-
-/* Spinner */
-.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:#FFF;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-@media(max-width:640px){
-  .topbar{padding:0 16px}
-  .main{padding:16px}
+.badge.size{background:var(--bg);color:var(--muted);border:1px solid var(--bd)}
+.btn-dl{background:var(--amber);color:var(--wh);border:none;padding:8px 16px;border-radius:7px;font-size:.78rem;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;transition:background .2s;font-family:inherit;flex-shrink:0}
+.btn-dl:hover{background:#D4820A}
+.badge-soon{background:var(--bg);border:1px solid var(--bd);color:var(--muted);padding:7px 14px;border-radius:7px;font-size:.76rem;font-weight:600;white-space:nowrap;flex-shrink:0}
+/* signature */
+.sig-section{background:var(--wh);border:1px solid var(--ambd);border-radius:12px;padding:24px;margin-bottom:24px;box-shadow:var(--sh)}
+.sig-section h3{font-family:'Satoshi',sans-serif;font-weight:800;font-size:.95rem;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--bd)}
+.sig-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--bg);flex-wrap:wrap}
+.sig-row:last-child{border-bottom:none}
+.sig-name{font-size:.88rem;font-weight:700;color:var(--text)}
+.sig-desc{font-size:.76rem;color:var(--muted);margin-top:2px}
+.btn-sign{background:var(--navy);color:var(--wh);border:none;padding:8px 18px;border-radius:7px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;white-space:nowrap}
+.btn-sign:hover{background:#0F1F40}
+.signed-badge{display:inline-flex;align-items:center;gap:5px;background:#F0FDF4;border:1px solid #BBF7D0;color:var(--green);padding:6px 12px;border-radius:7px;font-size:.76rem;font-weight:700;white-space:nowrap}
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(7,16,42,.55);display:none;align-items:center;justify-content:center;z-index:200;padding:20px}
+.overlay.open{display:flex}
+.modal{background:var(--wh);border-radius:16px;padding:32px;width:100%;max-width:460px;box-shadow:0 8px 40px rgba(7,16,42,.2);position:relative}
+.modal-title{font-family:'Satoshi',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:6px}
+.modal-desc{font-size:.85rem;color:var(--muted);line-height:1.65;margin-bottom:20px}
+.check-row{display:flex;align-items:flex-start;gap:10px;background:var(--ambg);border:1px solid var(--ambd);border-radius:8px;padding:12px;margin-bottom:16px}
+.check-row input{margin-top:3px;width:16px;height:16px;accent-color:var(--amber);flex-shrink:0}
+.check-row label{font-size:.84rem;color:var(--text);line-height:1.55;cursor:pointer}
+.modal-btns{display:flex;gap:10px;margin-top:4px}
+.btn-cancel{flex:1;background:transparent;border:1.5px solid var(--bd);color:var(--muted);padding:10px;border-radius:7px;font-size:.88rem;font-weight:600;cursor:pointer;font-family:inherit;transition:border-color .2s}
+.btn-cancel:hover{border-color:var(--text)}
+.btn-confirm{flex:2;background:var(--navy);color:var(--wh);border:none;padding:10px;border-radius:7px;font-size:.88rem;font-weight:800;cursor:pointer;font-family:inherit;transition:background .2s}
+.btn-confirm:hover{background:#0F1F40}
+.btn-confirm:disabled{opacity:.5;cursor:not-allowed}
+/* footer */
+.pfooter{text-align:center;padding:20px 40px;font-size:.73rem;color:var(--muted);border-top:1px solid var(--bd);margin-top:16px}
+.pfooter a{color:var(--amber);text-decoration:none}
+/* spinner */
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:sp .6s linear infinite;vertical-align:middle;margin-right:5px}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media(max-width:600px){
+  .topbar,.content-wrap,.pfooter{padding-left:16px;padding-right:16px}
   .doc-card{flex-wrap:wrap}
-  .btn-download,.badge-soon{width:100%;text-align:center;justify-content:center}
-  .stats-row{gap:8px}
-  .screen-login,.screen-setpass{padding:20px 16px;align-items:flex-start;padding-top:32px}
+  .btn-dl,.badge-soon{width:100%;text-align:center;justify-content:center}
 }
 </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
 <div class="topbar">
-  <div class="topbar-logo"><a href="index.html">North IT</a></div>
+  <a href="index.html" class="logo">North IT</a>
   <div class="topbar-right">
-    <span class="user-pill" id="user-pill"></span>
-    <button class="btn-logout" id="btn-logout" onclick="handleLogout()">Se déconnecter</button>
+    <span class="user-pill" id="upill"></span>
+    <button class="btn-sm" id="btnout" onclick="doLogout()">Se déconnecter</button>
   </div>
 </div>
 
-<!-- ═══ ÉCRAN 1 : LOGIN ═══ -->
-<div class="screen-login" id="screen-login">
-  <div class="login-card">
-    <div class="login-brand">North IT</div>
-    <div class="login-sub">Formation ITIL® 4 Foundation</div>
-    <div class="login-divider"></div>
-    <div class="login-title">🔐 Espace Apprenant</div>
-    <p class="login-desc">Accédez à vos supports de cours, documents de formation et ressources partagées par votre formateur.</p>
-
-    <form id="form-login" onsubmit="handleLogin(event)">
-      <div class="form-group">
-        <label class="form-label" for="input-email">Adresse e-mail</label>
-        <input class="form-input" id="input-email" type="email" placeholder="votre@email.fr" required autocomplete="email"/>
-      </div>
-      <div class="form-group" id="password-group">
-        <label class="form-label" for="input-password">Mot de passe</label>
-        <input class="form-input" id="input-password" type="password" placeholder="••••••••" required autocomplete="current-password"/>
-      </div>
-      <button class="btn-primary" type="submit" id="btn-submit-login">Se connecter →</button>
-      <button class="btn-secondary" type="button" onclick="showForgotPassword()">Mot de passe oublié / Première connexion</button>
+<!-- LOGIN -->
+<div class="screen" id="s-login">
+  <div class="card">
+    <div class="brand">North IT</div>
+    <div class="brand-sub">Formation ITIL® 4 Foundation</div>
+    <div class="divider"></div>
+    <div class="card-title">🔐 Espace Apprenant</div>
+    <p class="card-desc">Accédez à vos supports de cours et documents de formation.</p>
+    <form onsubmit="doLogin(event)">
+      <div class="fg"><label>Adresse e-mail</label><input id="lemail" type="email" required autocomplete="email" placeholder="votre@email.fr"/></div>
+      <div class="fg"><label>Mot de passe</label><input id="lpwd" type="password" required autocomplete="current-password" placeholder="••••••••"/></div>
+      <button class="btn-primary" id="lbtn">Se connecter →</button>
     </form>
-
-    <div class="error-msg" id="login-error"></div>
-    <div class="success-msg" id="login-success"></div>
-
-    <div class="login-footer">
-      Accès réservé aux participants inscrits par North IT.
-      <br>Pas encore d'accès ? <a href="mailto:e.georges@northit.fr" style="color:var(--amber)">Contacter le formateur</a>
-    </div>
-    <div class="login-security">🔒 Connexion sécurisée via Supabase · Données hébergées en Europe</div>
+    <button class="btn-link" onclick="doForgot()">Mot de passe oublié / Première connexion</button>
+    <div class="msg err" id="lerr"></div>
+    <div class="msg ok" id="lok"></div>
+    <p class="note">Accès réservé aux participants inscrits.<br>🔒 Sécurisé via Supabase · Données hébergées en Europe</p>
   </div>
 </div>
 
-<!-- ═══ ÉCRAN 2 : DÉFINIR MOT DE PASSE (1ère connexion via lien d'invitation) ═══ -->
-<div class="screen-setpass" id="screen-setpass">
-  <div class="setpass-card">
-    <div class="login-brand" style="margin-bottom:4px">North IT</div>
-    <div class="login-sub">Espace Apprenant</div>
-    <div class="login-divider" style="background:var(--green)"></div>
-    <div class="login-title">✅ Bienvenue !</div>
-    <p class="login-desc">Vous avez rejoint l'espace apprenant North IT. Choisissez un mot de passe pour vos prochaines connexions.</p>
-
-    <form id="form-setpass" onsubmit="handleSetPassword(event)">
-      <div class="form-group">
-        <label class="form-label" for="new-password">Nouveau mot de passe</label>
-        <input class="form-input" id="new-password" type="password" placeholder="Minimum 8 caractères" required minlength="8" autocomplete="new-password"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="confirm-password">Confirmer le mot de passe</label>
-        <input class="form-input" id="confirm-password" type="password" placeholder="Répétez votre mot de passe" required autocomplete="new-password"/>
-      </div>
-      <button class="btn-primary" type="submit" id="btn-submit-setpass">Accéder à mes documents →</button>
-    </form>
-    <div class="error-msg" id="setpass-error"></div>
+<!-- MFA ENROLLMENT -->
+<div class="screen hidden" id="s-enroll">
+  <div class="card">
+    <div class="brand">North IT</div>
+    <div class="divider"></div>
+    <div class="card-title">📱 Activer la double authentification</div>
+    <p class="card-desc">Scannez le QR code avec Google Authenticator ou Authy, puis entrez le code à 6 chiffres.</p>
+    <div class="qr-box" id="qrbox"></div>
+    <div style="font-size:.75rem;color:var(--muted);margin-bottom:12px">Code manuel : <span class="secret-box" id="qrsecret"></span></div>
+    <div class="fg"><label>Code à 6 chiffres</label><input id="ecode" type="text" inputmode="numeric" maxlength="6" placeholder="123456" autocomplete="one-time-code"/></div>
+    <button class="btn-primary" id="ebtn" onclick="doEnrollVerify()">Activer et accéder →</button>
+    <div class="msg err" id="eerr"></div>
   </div>
 </div>
 
-<!-- ═══ ÉCRAN 3 : CONTENU APPRENANT ═══ -->
-<div class="screen-content" id="screen-content">
-  <div class="main">
-
-    <div class="welcome-banner">
-      <div class="welcome-icon">📚</div>
-      <div class="welcome-text">
-        <h2 id="welcome-title">Bienvenue dans votre espace apprenant</h2>
-        <p id="welcome-message">Les documents sont mis à disposition progressivement au fil de la formation.</p>
-      </div>
-    </div>
-
-    <div class="stats-row" id="stats-row"></div>
-    <div id="docs-container"><div class="loading-state">Chargement des documents…</div></div>
-
+<!-- MFA VERIFICATION -->
+<div class="screen hidden" id="s-verify">
+  <div class="card">
+    <div class="brand">North IT</div>
+    <div class="divider"></div>
+    <div class="card-title">🔑 Vérification</div>
+    <p class="card-desc">Entrez le code à 6 chiffres généré par votre application d'authentification.</p>
+    <div class="fg"><label>Code à 6 chiffres</label><input id="vcode" type="text" inputmode="numeric" maxlength="6" placeholder="123456" autocomplete="one-time-code"/></div>
+    <button class="btn-primary" id="vbtn" onclick="doVerify()">Confirmer →</button>
+    <div class="msg err" id="verr"></div>
   </div>
-  <div class="portal-footer">
-    North IT · Formation ITIL® 4 Foundation · ATO agréé PeopleCert ·
-    <a href="mailto:e.georges@northit.fr">Contacter le formateur</a>
+</div>
+
+<!-- SET PASSWORD (1ère connexion via lien invite) -->
+<div class="screen hidden" id="s-setpwd">
+  <div class="card" style="--amber:#16A34A;--ambd:rgba(22,163,74,.2)">
+    <div class="brand">North IT</div>
+    <div class="divider" style="background:#16A34A"></div>
+    <div class="card-title">✅ Bienvenue !</div>
+    <p class="card-desc">Choisissez votre mot de passe pour les prochaines connexions.</p>
+    <div class="fg"><label>Nouveau mot de passe</label><input id="np1" type="password" minlength="8" required placeholder="Minimum 8 caractères" autocomplete="new-password"/></div>
+    <div class="fg"><label>Confirmer</label><input id="np2" type="password" minlength="8" required placeholder="Répétez" autocomplete="new-password"/></div>
+    <button class="btn-primary" id="pbtn" onclick="doSetPwd()">Créer mon accès →</button>
+    <div class="msg err" id="perr"></div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content-wrap" id="s-content">
+  <div class="welcome">
+    <div class="welcome-icon">📚</div>
+    <div><h2 id="wtitle">Bienvenue dans votre espace apprenant</h2><p id="wmsg">Les documents sont mis à disposition progressivement au fil de la formation.</p></div>
+  </div>
+  <div id="docs-out"></div>
+
+  <!-- Signatures -->
+  <div class="sig-section">
+    <h3>📝 Documents à signer</h3>
+    <div id="sig-out"></div>
+  </div>
+</div>
+
+<div class="pfooter" id="pfooter" style="display:none">
+  North IT · Formation ITIL® 4 Foundation · ATO agréé PeopleCert · <a href="mailto:e.georges@northit.fr">Contacter le formateur</a>
+</div>
+
+<!-- MODAL SIGNATURE -->
+<div class="overlay" id="sig-overlay">
+  <div class="modal">
+    <div class="modal-title" id="sig-modal-title">Signer le document</div>
+    <p class="modal-desc" id="sig-modal-desc"></p>
+    <div class="fg"><label>Votre nom complet <span style="color:var(--red)">*</span></label><input id="sig-name" type="text" placeholder="Prénom Nom" required/></div>
+    <div class="check-row">
+      <input type="checkbox" id="sig-check"/>
+      <label for="sig-check">Je certifie avoir pris connaissance de ce document et en accepte le contenu. Cette signature électronique vaut engagement de ma part.</label>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeSigModal()">Annuler</button>
+      <button class="btn-confirm" id="sig-confirm-btn" onclick="confirmSign()">Signer →</button>
+    </div>
+    <div class="msg err" id="sigerr" style="margin-top:12px"></div>
   </div>
 </div>
 
 <script>
-/* ══════════════════════════════════════════════════════
-   ⚙️  CONFIGURATION — À REMPLIR AVEC VOS CLÉS SUPABASE
-   ══════════════════════════════════════════════════════ */
-const SUPABASE_URL  = 'https://muygrrpnrfppjdgcbobx.supabase.co';
-const SUPABASE_ANON = 'sb_publishable_mqC9jbz_pE5C4LB28no92A_I5mZfLwJ';
-
-/* ══════════════════════════════════════════════════════
-   Initialisation Supabase
-   ══════════════════════════════════════════════════════ */
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON, {
-  auth: {
-    autoRefreshToken: true,
-    persistSession: true,
-    detectSessionInUrl: true,
-  }
+const SB_URL  = 'https://muygrrpnrfppjdgcbobx.supabase.co';
+const SB_ANON = 'sb_publishable_mqC9jbz_pE5C4LB28no92A_I5mZfLwJ';
+const sb = supabase.createClient(SB_URL, SB_ANON, {
+  auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true }
 });
 
-/* ══════════════════════════════════════════════════════
-   Gestion des états d'affichage
-   ══════════════════════════════════════════════════════ */
-function showScreen(name) {
-  document.getElementById('screen-login').style.display    = name === 'login'   ? 'flex' : 'none';
-  document.getElementById('screen-setpass').style.display  = name === 'setpass' ? 'flex' : 'none';
-  document.getElementById('screen-content').style.display  = name === 'content' ? 'flex' : 'none';
-  document.getElementById('btn-logout').style.display      = name === 'content' ? 'inline-block' : 'none';
-  document.getElementById('user-pill').style.display       = name === 'content' ? 'inline-block' : 'none';
-}
+let enrollFactorId = null, enrollChallengeId = null, verifFactorId = null;
+let currentUser = null, currentDocType = null;
 
-function setUserPill(email) {
-  const pill = document.getElementById('user-pill');
-  pill.textContent = email;
-}
-
-/* ══════════════════════════════════════════════════════
-   Écoute des changements d'état Supabase
-   ══════════════════════════════════════════════════════ */
-sb.auth.onAuthStateChange(async (event, session) => {
-  console.log('Auth event:', event);
-
-  if (event === 'PASSWORD_RECOVERY' || event === 'USER_UPDATED') {
-    // Lien d'invitation ou reset password cliqué
-    showScreen('setpass');
-    return;
-  }
-
-  if (event === 'SIGNED_IN' && session) {
-    // Vérifier si c'est une première connexion via invitation (pas encore de mot de passe défini)
-    const meta = session.user.user_metadata;
-    if (meta?.invitation_accepted === false || meta?.needs_password) {
-      showScreen('setpass');
-    } else {
-      setUserPill(session.user.email);
-      showScreen('content');
-      await loadDocuments(session.user);
-    }
-    return;
-  }
-
-  if (event === 'SIGNED_OUT' || event === 'INITIAL_SESSION' && !session) {
-    showScreen('login');
-    return;
-  }
-
-  if (event === 'INITIAL_SESSION' && session) {
-    setUserPill(session.user.email);
-    showScreen('content');
-    await loadDocuments(session.user);
-  }
-});
-
-/* ══════════════════════════════════════════════════════
-   Connexion email + mot de passe
-   ══════════════════════════════════════════════════════ */
-async function handleLogin(e) {
-  e.preventDefault();
-  const email    = document.getElementById('input-email').value.trim();
-  const password = document.getElementById('input-password').value;
-  const btn      = document.getElementById('btn-submit-login');
-  const errEl    = document.getElementById('login-error');
-
-  errEl.style.display = 'none';
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>Connexion…';
-
-  const { error } = await sb.auth.signInWithPassword({ email, password });
-
-  btn.disabled = false;
-  btn.innerHTML = 'Se connecter →';
-
-  if (error) {
-    errEl.textContent = traductionErreur(error.message);
-    errEl.style.display = 'block';
-    document.getElementById('input-password').classList.add('error');
-  }
-}
-
-/* ══════════════════════════════════════════════════════
-   Mot de passe oublié / Première connexion
-   ══════════════════════════════════════════════════════ */
-function showForgotPassword() {
-  const email  = document.getElementById('input-email').value.trim();
-  const errEl  = document.getElementById('login-error');
-  const succEl = document.getElementById('login-success');
-
-  if (!email) {
-    errEl.textContent = 'Saisissez d\'abord votre adresse e-mail ci-dessus.';
-    errEl.style.display = 'block';
-    return;
-  }
-
-  errEl.style.display = 'none';
-  const btn = document.getElementById('btn-submit-login');
-  btn.disabled = true;
-
-  sb.auth.resetPasswordForEmail(email, {
-    redirectTo: window.location.origin + '/espace-apprenant.html'
-  }).then(({ error }) => {
-    btn.disabled = false;
-    if (error) {
-      errEl.textContent = traductionErreur(error.message);
-      errEl.style.display = 'block';
-    } else {
-      succEl.textContent = `Un e-mail de réinitialisation a été envoyé à ${email}. Vérifiez votre boîte de réception.`;
-      succEl.style.display = 'block';
-    }
+// ── UTILS ──
+function show(id) {
+  ['s-login','s-enroll','s-verify','s-setpwd'].forEach(s => {
+    const el = document.getElementById(s);
+    el.classList.toggle('hidden', s !== id);
+    el.style.display = s === id ? 'flex' : 'none';
   });
 }
+function showContent() {
+  ['s-login','s-enroll','s-verify','s-setpwd'].forEach(s => {
+    document.getElementById(s).style.display = 'none';
+  });
+  document.getElementById('s-content').style.display = 'block';
+  document.getElementById('pfooter').style.display = 'block';
+  document.getElementById('btnout').style.display = 'inline-block';
+  const pill = document.getElementById('upill');
+  pill.style.display = 'inline-block';
+  pill.textContent = currentUser?.email || '';
+}
+function showErr(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = msg; el.style.display = 'block'; el.className = 'msg err';
+}
+function showOk(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = msg; el.style.display = 'block'; el.className = 'msg ok';
+}
+function setLoading(btnId, loading, label = '→') {
+  const btn = document.getElementById(btnId);
+  btn.disabled = loading;
+  btn.innerHTML = loading ? '<span class="spin"></span>Chargement…' : label;
+}
+function xlat(msg) {
+  if (msg.includes('Invalid login')) return 'Email ou mot de passe incorrect.';
+  if (msg.includes('Email not confirmed')) return 'Confirmez votre email d\'abord.';
+  if (msg.includes('rate limit')) return 'Trop de tentatives. Attendez quelques minutes.';
+  if (msg.includes('expired')) return 'Code expiré. Relancez une vérification.';
+  if (msg.includes('Invalid TOTP')) return 'Code incorrect. Réessayez.';
+  return 'Une erreur s\'est produite. Réessayez.';
+}
 
-/* ══════════════════════════════════════════════════════
-   Définir le mot de passe (1ère connexion)
-   ══════════════════════════════════════════════════════ */
-async function handleSetPassword(e) {
-  e.preventDefault();
-  const pwd1  = document.getElementById('new-password').value;
-  const pwd2  = document.getElementById('confirm-password').value;
-  const btn   = document.getElementById('btn-submit-setpass');
-  const errEl = document.getElementById('setpass-error');
-
-  errEl.style.display = 'none';
-
-  if (pwd1 !== pwd2) {
-    errEl.textContent = 'Les mots de passe ne correspondent pas.';
-    errEl.style.display = 'block';
-    return;
+// ── AUTH STATE ──
+sb.auth.onAuthStateChange(async (event, session) => {
+  if (event === 'PASSWORD_RECOVERY') { show('s-setpwd'); return; }
+  if (!session) { show('s-login'); return; }
+  currentUser = session.user;
+  if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
+    await checkMFA(session);
   }
-  if (pwd1.length < 8) {
-    errEl.textContent = 'Le mot de passe doit contenir au moins 8 caractères.';
-    errEl.style.display = 'block';
-    return;
-  }
+  if (event === 'USER_UPDATED') { await checkMFA(session); }
+});
 
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>Enregistrement…';
-
-  const { data, error } = await sb.auth.updateUser({ password: pwd1 });
-
-  btn.disabled = false;
-  btn.innerHTML = 'Accéder à mes documents →';
-
-  if (error) {
-    errEl.textContent = traductionErreur(error.message);
-    errEl.style.display = 'block';
+async function checkMFA(session) {
+  const { data: { currentLevel, nextLevel } } = await sb.auth.mfa.getAuthenticatorAssuranceLevel();
+  if (currentLevel === 'aal2') { await loadContent(); return; }
+  const { data: factors } = await sb.auth.mfa.listFactors();
+  const totps = factors?.totp || [];
+  if (totps.length === 0) {
+    await startEnroll();
   } else {
-    setUserPill(data.user.email);
-    showScreen('content');
-    await loadDocuments(data.user);
+    verifFactorId = totps[0].id;
+    show('s-verify');
   }
 }
 
-/* ══════════════════════════════════════════════════════
-   Déconnexion
-   ══════════════════════════════════════════════════════ */
-async function handleLogout() {
-  await sb.auth.signOut();
+// ── LOGIN ──
+async function doLogin(e) {
+  e.preventDefault();
+  setLoading('lbtn', true, 'Se connecter →');
+  document.getElementById('lerr').style.display = 'none';
+  const { error } = await sb.auth.signInWithPassword({
+    email: document.getElementById('lemail').value.trim(),
+    password: document.getElementById('lpwd').value
+  });
+  setLoading('lbtn', false, 'Se connecter →');
+  if (error) showErr('lerr', xlat(error.message));
 }
 
-/* ══════════════════════════════════════════════════════
-   Chargement et affichage des documents
-   ══════════════════════════════════════════════════════ */
-async function loadDocuments(user) {
-  const container = document.getElementById('docs-container');
-  const statsRow  = document.getElementById('stats-row');
+async function doForgot() {
+  const email = document.getElementById('lemail').value.trim();
+  if (!email) { showErr('lerr', 'Entrez d\'abord votre e-mail.'); return; }
+  setLoading('lbtn', true, 'Se connecter →');
+  await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.href });
+  setLoading('lbtn', false, 'Se connecter →');
+  showOk('lok', `E-mail envoyé à ${email}. Vérifiez votre boîte.`);
+}
 
-  // Message de bienvenue personnalisé
-  const prenom = user.user_metadata?.full_name?.split(' ')[0] || user.email.split('@')[0];
-  document.getElementById('welcome-title').textContent = `Bonjour ${prenom} 👋`;
+// ── SET PASSWORD ──
+async function doSetPwd() {
+  const p1 = document.getElementById('np1').value;
+  const p2 = document.getElementById('np2').value;
+  if (p1 !== p2) { showErr('perr', 'Les mots de passe ne correspondent pas.'); return; }
+  if (p1.length < 8) { showErr('perr', 'Minimum 8 caractères.'); return; }
+  setLoading('pbtn', true, 'Créer mon accès →');
+  const { data, error } = await sb.auth.updateUser({ password: p1 });
+  setLoading('pbtn', false, 'Créer mon accès →');
+  if (error) { showErr('perr', xlat(error.message)); return; }
+  currentUser = data.user;
+  await checkMFA({ user: data.user });
+}
 
-  try {
-    const res = await fetch('documents.json?nc=' + Date.now());
-    if (!res.ok) throw new Error('Fichier documents.json introuvable');
-    const config = await res.json();
+// ── MFA ENROLL ──
+async function startEnroll() {
+  const { data, error } = await sb.auth.mfa.enroll({ factorType: 'totp', issuer: 'North IT' });
+  if (error) { show('s-login'); showErr('lerr', 'Erreur d\'enrôlement MFA.'); return; }
+  enrollFactorId = data.id;
+  document.getElementById('qrbox').innerHTML = data.totp.qr_code;
+  document.getElementById('qrsecret').textContent = data.totp.secret;
+  const { data: ch } = await sb.auth.mfa.challenge({ factorId: enrollFactorId });
+  enrollChallengeId = ch.id;
+  show('s-enroll');
+}
 
-    if (config.message_accueil) {
-      document.getElementById('welcome-message').textContent = config.message_accueil;
-    }
+async function doEnrollVerify() {
+  const code = document.getElementById('ecode').value.replace(/\s/g, '');
+  if (code.length !== 6) { showErr('eerr', 'Entrez un code à 6 chiffres.'); return; }
+  setLoading('ebtn', true, 'Activer et accéder →');
+  const { error } = await sb.auth.mfa.verify({ factorId: enrollFactorId, challengeId: enrollChallengeId, code });
+  setLoading('ebtn', false, 'Activer et accéder →');
+  if (error) { showErr('eerr', xlat(error.message)); return; }
+  await loadContent();
+}
 
-    const docs        = config.documents || [];
-    const nbVisible   = docs.filter(d => d.visible).length;
-    const nbVerrouil  = docs.filter(d => !d.visible).length;
+// ── MFA VERIFY ──
+async function doVerify() {
+  const code = document.getElementById('vcode').value.replace(/\s/g, '');
+  if (code.length !== 6) { showErr('verr', 'Entrez un code à 6 chiffres.'); return; }
+  setLoading('vbtn', true, 'Confirmer →');
+  const { data: ch, error: ce } = await sb.auth.mfa.challenge({ factorId: verifFactorId });
+  if (ce) { setLoading('vbtn', false, 'Confirmer →'); showErr('verr', xlat(ce.message)); return; }
+  const { error } = await sb.auth.mfa.verify({ factorId: verifFactorId, challengeId: ch.id, code });
+  setLoading('vbtn', false, 'Confirmer →');
+  if (error) { showErr('verr', xlat(error.message)); return; }
+  await loadContent();
+}
 
-    // Statistiques
-    statsRow.innerHTML = `
-      <div class="stat-chip">
-        <strong>${nbVisible}</strong>
-        <span>document${nbVisible > 1 ? 's' : ''} disponible${nbVisible > 1 ? 's' : ''}</span>
+// ── LOAD CONTENT ──
+async function loadContent() {
+  showContent();
+  const prenom = currentUser?.user_metadata?.full_name?.split(' ')[0] || currentUser?.email?.split('@')[0];
+  document.getElementById('wtitle').textContent = `Bonjour ${prenom} 👋`;
+  await Promise.all([loadDocs(), loadSignatures()]);
+}
+
+async function loadDocs() {
+  const { data: docs, error } = await sb.from('documents').select('*').eq('visible', true).order('categorie').order('nom');
+  const out = document.getElementById('docs-out');
+  if (error || !docs?.length) { out.innerHTML = '<p style="color:var(--muted);font-size:.88rem;text-align:center;padding:24px">Aucun document disponible pour le moment.</p>'; return; }
+  const cats = {};
+  docs.forEach(d => { if (!cats[d.categorie]) cats[d.categorie] = []; cats[d.categorie].push(d); });
+  const order = ['Organisation','Supports de cours','Préparation examen'];
+  const sorted = [...order.filter(c => cats[c]), ...Object.keys(cats).filter(c => !order.includes(c))];
+  out.innerHTML = sorted.map(cat => `
+    <div class="cat-label">${cat}</div>
+    <div class="doc-list">${cats[cat].map(d => `
+      <div class="doc-card avail">
+        <div class="doc-icon ${d.type}">${d.type === 'excel' ? '📊' : '📄'}</div>
+        <div class="doc-info">
+          <div class="doc-name">${d.nom}</div>
+          ${d.description ? `<div class="doc-desc">${d.description}</div>` : ''}
+          <div class="doc-meta">
+            <span class="badge ${d.type}">${d.type === 'excel' ? 'Excel' : 'PDF'}</span>
+            ${d.taille ? `<span class="badge size">${d.taille}</span>` : ''}
+          </div>
+        </div>
+        <a href="${d.url}" target="_blank" rel="noopener" class="btn-dl">⬇ Télécharger</a>
+      </div>`).join('')}
+    </div>`).join('');
+}
+
+// ── SIGNATURES ──
+const SIG_DOCS = [
+  { type: 'engagement', label: 'Engagement de participation', desc: 'Attestation d\'inscription et d\'engagement à suivre la formation ITIL® 4 Foundation.' },
+  { type: 'emargement', label: 'Feuille d\'émargement', desc: 'Confirmation de présence aux 3 jours de formation (lundi, mardi, mercredi).' },
+  { type: 'attestation', label: 'Attestation de fin de formation', desc: 'Certifie la participation complète à la formation ITIL® 4 Foundation avec North IT.' }
+];
+
+async function loadSignatures() {
+  const { data: sigs } = await sb.from('signatures').select('document_type, full_name, signed_at').eq('user_id', currentUser.id);
+  const signed = {};
+  (sigs || []).forEach(s => { signed[s.document_type] = s; });
+  document.getElementById('sig-out').innerHTML = SIG_DOCS.map(d => `
+    <div class="sig-row">
+      <div>
+        <div class="sig-name">${d.label}</div>
+        <div class="sig-desc">${d.desc}</div>
       </div>
-      ${nbVerrouil > 0 ? `<div class="stat-chip"><strong>${nbVerrouil}</strong><span>à venir</span></div>` : ''}
-      <div class="stat-chip"><strong>ITIL® 4 Foundation</strong></div>
-    `;
-
-    if (docs.length === 0) {
-      container.innerHTML = `
-        <div class="empty-state">
-          <div class="e-icon">📂</div>
-          <h3>Aucun document disponible</h3>
-          <p>Votre formateur n'a pas encore ajouté de documents. Revenez prochainement.</p>
-        </div>`;
-      return;
-    }
-
-    // Grouper par catégorie
-    const cats = {};
-    const catOrder = ['Organisation', 'Supports de cours', 'Préparation examen'];
-    docs.forEach(d => {
-      const c = d.categorie || 'Documents';
-      if (!cats[c]) cats[c] = [];
-      cats[c].push(d);
-    });
-    const orderedCats = [
-      ...catOrder.filter(c => cats[c]),
-      ...Object.keys(cats).filter(c => !catOrder.includes(c))
-    ];
-
-    let html = '';
-    orderedCats.forEach(cat => {
-      html += `<div class="category-block"><div class="category-label">${cat}</div><div class="doc-list">`;
-      cats[cat].forEach(doc => {
-        const isExcel = doc.type === 'excel';
-        if (doc.visible) {
-          html += `
-          <div class="doc-card available">
-            <div class="doc-icon ${isExcel ? 'excel' : 'pdf'}">${isExcel ? '📊' : '📄'}</div>
-            <div class="doc-info">
-              <div class="doc-name">${doc.nom}</div>
-              ${doc.description ? `<div class="doc-desc">${doc.description}</div>` : ''}
-              <div class="doc-badges">
-                <span class="badge ${isExcel ? 'excel' : 'pdf'}">${isExcel ? 'Excel' : 'PDF'}</span>
-                ${doc.taille ? `<span class="badge size">${doc.taille}</span>` : ''}
-              </div>
-            </div>
-            <a href="${doc.url}" target="_blank" rel="noopener" class="btn-download">⬇&nbsp;Télécharger</a>
-          </div>`;
-        } else {
-          html += `
-          <div class="doc-card locked">
-            <div class="doc-icon lock">🔒</div>
-            <div class="doc-info">
-              <div class="doc-name" style="color:var(--muted)">${doc.nom}</div>
-              ${doc.description ? `<div class="doc-desc">${doc.description}</div>` : ''}
-              <div class="doc-badges">
-                <span class="badge ${isExcel ? 'excel' : 'pdf'}">${isExcel ? 'Excel' : 'PDF'}</span>
-              </div>
-            </div>
-            <span class="badge-soon">🕐 Prochainement</span>
-          </div>`;
-        }
-      });
-      html += `</div></div>`;
-    });
-
-    container.innerHTML = html;
-
-  } catch (err) {
-    console.error(err);
-    container.innerHTML = `
-      <div class="empty-state">
-        <div class="e-icon">⚠️</div>
-        <h3>Erreur de chargement</h3>
-        <p>Impossible de charger les documents. Actualisez la page ou contactez votre formateur.</p>
-      </div>`;
-  }
+      ${signed[d.type]
+        ? `<div class="signed-badge">✓ Signé le ${new Date(signed[d.type].signed_at).toLocaleDateString('fr-FR')} par ${signed[d.type].full_name}</div>`
+        : `<button class="btn-sign" onclick="openSigModal('${d.type}','${d.label}','${d.desc}')">Signer</button>`}
+    </div>`).join('');
 }
 
-/* ══════════════════════════════════════════════════════
-   Traduction des messages d'erreur Supabase
-   ══════════════════════════════════════════════════════ */
-function traductionErreur(msg) {
-  const errors = {
-    'Invalid login credentials':       'Email ou mot de passe incorrect.',
-    'Email not confirmed':             'Votre e-mail n\'est pas encore confirmé. Vérifiez votre boîte de réception.',
-    'User not found':                  'Aucun compte trouvé avec cet e-mail.',
-    'Password should be at least':     'Le mot de passe doit contenir au moins 8 caractères.',
-    'Unable to validate email':        'Adresse e-mail invalide.',
-    'Email rate limit exceeded':       'Trop de tentatives. Réessayez dans quelques minutes.',
-    'Token has expired':               'Le lien a expiré. Demandez un nouveau lien ci-dessous.',
-  };
-  for (const [key, value] of Object.entries(errors)) {
-    if (msg.includes(key)) return value;
-  }
-  return 'Une erreur s\'est produite. Veuillez réessayer.';
+function openSigModal(type, label, desc) {
+  currentDocType = type;
+  document.getElementById('sig-modal-title').textContent = label;
+  document.getElementById('sig-modal-desc').textContent = desc;
+  document.getElementById('sig-name').value = currentUser?.user_metadata?.full_name || '';
+  document.getElementById('sig-check').checked = false;
+  document.getElementById('sigerr').style.display = 'none';
+  document.getElementById('sig-overlay').classList.add('open');
+}
+function closeSigModal() {
+  document.getElementById('sig-overlay').classList.remove('open');
+  currentDocType = null;
+}
+
+async function confirmSign() {
+  const name = document.getElementById('sig-name').value.trim();
+  const checked = document.getElementById('sig-check').checked;
+  if (!name) { showErr('sigerr', 'Entrez votre nom complet.'); return; }
+  if (!checked) { showErr('sigerr', 'Cochez la case pour confirmer.'); return; }
+  const btn = document.getElementById('sig-confirm-btn');
+  btn.disabled = true; btn.textContent = 'Enregistrement…';
+  const { error } = await sb.from('signatures').insert({
+    user_id: currentUser.id,
+    document_type: currentDocType,
+    full_name: name,
+    email: currentUser.email,
+    session_nom: 'Formation ITIL® 4 Foundation'
+  });
+  btn.disabled = false; btn.textContent = 'Signer →';
+  if (error) { showErr('sigerr', 'Erreur lors de la signature. Réessayez.'); return; }
+  closeSigModal();
+  await loadSignatures();
+}
+
+async function doLogout() {
+  await sb.auth.signOut();
+  document.getElementById('s-content').style.display = 'none';
+  document.getElementById('pfooter').style.display = 'none';
+  document.getElementById('btnout').style.display = 'none';
+  document.getElementById('upill').style.display = 'none';
+  show('s-login');
 }
 </script>
 </body>

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Espace Formateur | North IT</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="preconnect" href="https://api.fontshare.com"/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,800,900&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--amber:#E8930A;--ambg:rgba(232,147,10,.09);--ambd:rgba(232,147,10,.22);--navy:#07102A;--text:#1A2B4A;--muted:#5A6B8A;--bd:#E0E5EF;--bg:#F5F7FC;--wh:#fff;--green:#16A34A;--red:#DC2626;--sh:0 2px 8px rgba(10,22,40,.07);--shm:0 4px 20px rgba(10,22,40,.12)}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
+.topbar{background:var(--wh);border-bottom:1px solid var(--bd);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;box-shadow:0 1px 6px rgba(10,22,40,.06);position:sticky;top:0;z-index:100}
+.logo{font-family:'Satoshi',sans-serif;font-weight:900;font-size:1.4rem;letter-spacing:-.5px;color:var(--text);text-decoration:none}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.user-pill{background:var(--ambg);border:1px solid var(--ambd);border-radius:100px;padding:4px 14px;font-size:.75rem;font-weight:600;color:var(--amber);display:none}
+.role-pill{background:#EEF2FF;border:1px solid #C7D2FE;border-radius:100px;padding:4px 14px;font-size:.72rem;font-weight:700;color:#4F46E5;display:none}
+.btn-sm{background:transparent;border:1.5px solid var(--bd);color:var(--muted);padding:6px 14px;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;display:none}
+.btn-sm:hover{border-color:var(--red);color:var(--red)}
+/* auth screens */
+.screen{min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.screen.hidden{display:none}
+.card{background:var(--wh);border:1px solid var(--bd);border-radius:16px;padding:36px;width:100%;max-width:400px;box-shadow:var(--shm);position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber)}
+.brand{font-family:'Satoshi',sans-serif;font-weight:900;font-size:1.4rem;letter-spacing:-.4px;margin-bottom:2px}
+.brand-sub{font-size:.78rem;color:var(--muted);margin-bottom:18px}
+.dv{width:32px;height:2px;background:var(--amber);margin-bottom:18px}
+.ctitle{font-family:'Satoshi',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:5px}
+.cdesc{font-size:.83rem;color:var(--muted);line-height:1.65;margin-bottom:22px}
+.fg{margin-bottom:12px}
+.fg label{display:block;font-size:.75rem;font-weight:700;color:var(--muted);margin-bottom:4px}
+.fg input{width:100%;background:var(--bg);border:1.5px solid var(--bd);border-radius:7px;padding:9px 12px;font-family:inherit;font-size:.9rem;color:var(--text);transition:border-color .2s}
+.fg input:focus{outline:none;border-color:var(--amber);background:var(--wh)}
+.btn-p{width:100%;background:var(--amber);color:var(--wh);border:none;padding:12px;border-radius:8px;font-weight:800;font-size:.92rem;cursor:pointer;font-family:inherit;transition:background .2s;margin-top:4px}
+.btn-p:hover{background:#D4820A}
+.btn-p:disabled{opacity:.55;cursor:not-allowed}
+.btn-link{background:none;border:none;color:var(--amber);font-size:.77rem;font-weight:600;cursor:pointer;padding:0;font-family:inherit;text-decoration:underline;text-underline-offset:3px;margin-top:8px;display:block;text-align:center}
+.emsg{background:#FEF2F2;border:1px solid #FECACA;color:var(--red);border-radius:7px;padding:9px 12px;font-size:.8rem;margin-top:9px;line-height:1.5;display:none}
+.okmsg{background:#F0FDF4;border:1px solid #BBF7D0;color:var(--green);border-radius:7px;padding:9px 12px;font-size:.8rem;margin-top:9px;line-height:1.5;display:none}
+.qr-box{background:var(--bg);border:1px solid var(--bd);border-radius:9px;padding:14px;text-align:center;margin-bottom:14px}
+.qr-box svg,.qr-box img{max-width:170px;height:auto}
+.secret{font-family:monospace;font-size:.78rem;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:7px 11px;word-break:break-all;color:var(--muted)}
+/* dashboard */
+.dash{max-width:940px;margin:0 auto;padding:28px 40px;display:none}
+/* tabs */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--bd);margin-bottom:24px}
+.tab{padding:10px 20px;font-size:.83rem;font-weight:600;color:var(--muted);border:none;background:transparent;border-bottom:2px solid transparent;cursor:pointer;font-family:inherit;transition:all .2s}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--amber);border-bottom-color:var(--amber)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+/* cards/table */
+.panel-card{background:var(--wh);border:1px solid var(--bd);border-radius:12px;padding:22px;box-shadow:var(--sh);margin-bottom:16px}
+.panel-card h3{font-family:'Satoshi',sans-serif;font-weight:800;font-size:.88rem;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center}
+.table{width:100%;border-collapse:collapse;font-size:.82rem}
+.table th{text-align:left;color:var(--muted);font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;padding:0 8px 10px}
+.table td{padding:10px 8px;border-bottom:1px solid var(--bg);vertical-align:middle}
+.table tr:last-child td{border-bottom:none}
+/* doc row */
+.doc-row{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--bg)}
+.doc-row:last-child{border-bottom:none}
+.doc-row-name{font-weight:700;font-size:.84rem}
+.doc-row-meta{font-size:.74rem;color:var(--muted);margin-top:2px}
+.toggle-wrap{display:flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;color:var(--muted);white-space:nowrap}
+.toggle{position:relative;width:38px;height:20px}
+.toggle input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;cursor:pointer;inset:0;background:#D1D5DB;border-radius:20px;transition:background .2s}
+.toggle-slider::before{content:'';position:absolute;width:16px;height:16px;left:2px;bottom:2px;background:#fff;border-radius:50%;transition:transform .2s}
+.toggle input:checked + .toggle-slider{background:var(--amber)}
+.toggle input:checked + .toggle-slider::before{transform:translateX(18px)}
+.btn-icon{background:transparent;border:1px solid var(--bd);color:var(--muted);padding:5px 10px;border-radius:6px;cursor:pointer;font-size:.75rem;font-weight:600;font-family:inherit;transition:all .2s}
+.btn-icon:hover{border-color:var(--amber);color:var(--amber)}
+.btn-danger{border-color:var(--red)!important;color:var(--red)!important}
+.btn-danger:hover{background:var(--red)!important;color:#fff!important}
+/* add doc form */
+.add-form{background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:18px;margin-top:12px;display:none}
+.add-form.open{display:block}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fgi{margin-bottom:10px}
+.fgi label{display:block;font-size:.73rem;font-weight:700;color:var(--muted);margin-bottom:4px}
+.fgi input,.fgi select{width:100%;background:var(--wh);border:1.5px solid var(--bd);border-radius:7px;padding:8px 11px;font-family:inherit;font-size:.85rem;color:var(--text);transition:border-color .2s}
+.fgi input:focus,.fgi select:focus{outline:none;border-color:var(--amber)}
+.form-btns{display:flex;gap:8px;margin-top:6px}
+.btn-save{background:var(--amber);color:#fff;border:none;padding:8px 18px;border-radius:7px;font-weight:700;font-size:.82rem;cursor:pointer;font-family:inherit;transition:background .2s}
+.btn-save:hover{background:#D4820A}
+.btn-cancel2{background:transparent;border:1.5px solid var(--bd);color:var(--muted);padding:8px 16px;border-radius:7px;font-weight:600;font-size:.82rem;cursor:pointer;font-family:inherit}
+/* invite form */
+.invite-form{background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:18px;margin-top:12px;display:none}
+.invite-form.open{display:block}
+/* badges */
+.badge-f{background:#EEF2FF;color:#4F46E5;border:1px solid #C7D2FE;padding:2px 8px;border-radius:4px;font-size:.68rem;font-weight:700}
+.badge-a{background:var(--ambg);color:var(--amber);border:1px solid var(--ambd);padding:2px 8px;border-radius:4px;font-size:.68rem;font-weight:700}
+.badge-s{background:#F0FDF4;color:var(--green);border:1px solid #BBF7D0;padding:2px 8px;border-radius:4px;font-size:.68rem;font-weight:700}
+.empty-state{text-align:center;padding:40px;color:var(--muted);font-size:.85rem}
+/* spinner */
+.spin{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .6s linear infinite;vertical-align:middle;margin-right:4px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.pfooter{text-align:center;padding:20px 40px;font-size:.72rem;color:var(--muted);border-top:1px solid var(--bd);margin-top:12px;display:none}
+@media(max-width:640px){
+  .topbar,.dash,.pfooter{padding-left:16px;padding-right:16px}
+  .form-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="logo">North IT</a>
+  <div class="topbar-right">
+    <span class="role-pill" id="rpill">Formateur</span>
+    <span class="user-pill" id="upill"></span>
+    <button class="btn-sm" id="btnout" onclick="doLogout()">Se déconnecter</button>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div class="screen" id="s-login">
+  <div class="card">
+    <div class="brand">North IT</div>
+    <div class="brand-sub">Espace Formateur</div>
+    <div class="dv"></div>
+    <div class="ctitle">🔐 Connexion formateur</div>
+    <p class="cdesc">Accès réservé au formateur North IT.</p>
+    <form onsubmit="doLogin(event)">
+      <div class="fg"><label>E-mail</label><input id="lemail" type="email" required autocomplete="email" placeholder="e.georges@northit.fr"/></div>
+      <div class="fg"><label>Mot de passe</label><input id="lpwd" type="password" required autocomplete="current-password" placeholder="••••••••"/></div>
+      <button class="btn-p" id="lbtn">Se connecter →</button>
+    </form>
+    <div class="emsg" id="lerr"></div>
+  </div>
+</div>
+
+<!-- MFA ENROLL -->
+<div class="screen hidden" id="s-enroll">
+  <div class="card">
+    <div class="brand">North IT</div>
+    <div class="dv"></div>
+    <div class="ctitle">📱 Activer la double authentification</div>
+    <p class="cdesc">Scannez le QR code avec Google Authenticator ou Authy.</p>
+    <div class="qr-box" id="qrbox"></div>
+    <div style="font-size:.73rem;color:var(--muted);margin-bottom:12px">Code manuel : <div class="secret" id="qrsecret"></div></div>
+    <div class="fg"><label>Code à 6 chiffres</label><input id="ecode" type="text" inputmode="numeric" maxlength="6" placeholder="123456" autocomplete="one-time-code"/></div>
+    <button class="btn-p" id="ebtn" onclick="doEnrollVerify()">Activer →</button>
+    <div class="emsg" id="eerr"></div>
+  </div>
+</div>
+
+<!-- MFA VERIFY -->
+<div class="screen hidden" id="s-verify">
+  <div class="card">
+    <div class="brand">North IT</div>
+    <div class="dv"></div>
+    <div class="ctitle">🔑 Vérification MFA</div>
+    <p class="cdesc">Entrez le code à 6 chiffres de votre application.</p>
+    <div class="fg"><label>Code à 6 chiffres</label><input id="vcode" type="text" inputmode="numeric" maxlength="6" placeholder="123456" autocomplete="one-time-code"/></div>
+    <button class="btn-p" id="vbtn" onclick="doVerify()">Confirmer →</button>
+    <div class="emsg" id="verr"></div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dash" id="s-dash">
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('docs',this)">📄 Documents</button>
+    <button class="tab" onclick="switchTab('users',this)">👥 Participants</button>
+    <button class="tab" onclick="switchTab('sigs',this)">✍️ Signatures</button>
+  </div>
+
+  <!-- TAB DOCUMENTS -->
+  <div class="tab-panel active" id="tp-docs">
+    <div class="panel-card">
+      <h3>
+        Gestion des documents
+        <button class="btn-icon" onclick="toggleAddForm()">+ Ajouter un document</button>
+      </h3>
+      <div class="add-form" id="add-form">
+        <div class="form-row">
+          <div class="fgi"><label>Nom du document *</label><input id="d-nom" placeholder="Programme — Jour 1"/></div>
+          <div class="fgi"><label>Catégorie *</label>
+            <select id="d-cat">
+              <option>Organisation</option>
+              <option>Supports de cours</option>
+              <option>Préparation examen</option>
+            </select>
+          </div>
+        </div>
+        <div class="fgi"><label>Description</label><input id="d-desc" placeholder="Brève description du document"/></div>
+        <div class="fgi"><label>URL Google Drive *</label><input id="d-url" placeholder="https://drive.google.com/file/d/…"/></div>
+        <div class="form-row">
+          <div class="fgi"><label>Type</label>
+            <select id="d-type"><option value="pdf">PDF</option><option value="excel">Excel</option></select>
+          </div>
+          <div class="fgi"><label>Taille</label><input id="d-taille" placeholder="2.4 Mo"/></div>
+        </div>
+        <div class="fgi"><label>Note admin (pour vous)</label><input id="d-note" placeholder="Ex : Partager le lundi matin"/></div>
+        <div class="form-btns">
+          <button class="btn-save" onclick="saveDoc()">Enregistrer</button>
+          <button class="btn-cancel2" onclick="toggleAddForm()">Annuler</button>
+        </div>
+        <div class="emsg" id="dadd-err"></div>
+        <div class="okmsg" id="dadd-ok"></div>
+      </div>
+      <div id="docs-list"><div class="empty-state">Chargement…</div></div>
+    </div>
+  </div>
+
+  <!-- TAB PARTICIPANTS -->
+  <div class="tab-panel" id="tp-users">
+    <div class="panel-card">
+      <h3>
+        Participants inscrits
+        <button class="btn-icon" onclick="toggleInviteForm()">+ Inviter un participant</button>
+      </h3>
+      <div class="invite-form" id="invite-form">
+        <div class="form-row">
+          <div class="fgi"><label>Prénom Nom *</label><input id="inv-name" placeholder="Marie Dupont"/></div>
+          <div class="fgi"><label>E-mail professionnel *</label><input id="inv-email" type="email" placeholder="marie@entreprise.fr"/></div>
+        </div>
+        <div class="form-btns">
+          <button class="btn-save" id="inv-btn" onclick="inviteUser()">Envoyer l'invitation</button>
+          <button class="btn-cancel2" onclick="toggleInviteForm()">Annuler</button>
+        </div>
+        <div class="emsg" id="inv-err"></div>
+        <div class="okmsg" id="inv-ok"></div>
+      </div>
+      <div id="users-list"><div class="empty-state">Chargement…</div></div>
+    </div>
+  </div>
+
+  <!-- TAB SIGNATURES -->
+  <div class="tab-panel" id="tp-sigs">
+    <div class="panel-card">
+      <h3>Signatures reçues</h3>
+      <div id="sigs-list"><div class="empty-state">Chargement…</div></div>
+    </div>
+  </div>
+</div>
+<div class="pfooter" id="pfooter">North IT · Espace Formateur · <a href="espace-apprenant.html" style="color:var(--amber)">Voir l'espace apprenant</a></div>
+
+<script>
+const SB_URL  = 'https://muygrrpnrfppjdgcbobx.supabase.co';
+const SB_ANON = 'sb_publishable_mqC9jbz_pE5C4LB28no92A_I5mZfLwJ';
+const sb = supabase.createClient(SB_URL, SB_ANON, {
+  auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true }
+});
+let enrollFactorId = null, enrollChallengeId = null, verifFactorId = null, currentUser = null;
+
+// ── UTILS ──
+function showScreen(id) {
+  ['s-login','s-enroll','s-verify'].forEach(s => {
+    const el = document.getElementById(s);
+    el.classList.toggle('hidden', s !== id);
+    el.style.display = s === id ? 'flex' : 'none';
+  });
+  document.getElementById('s-dash').style.display = 'none';
+  document.getElementById('pfooter').style.display = 'none';
+  document.getElementById('btnout').style.display = 'none';
+  document.getElementById('upill').style.display = 'none';
+  document.getElementById('rpill').style.display = 'none';
+}
+function showDash() {
+  ['s-login','s-enroll','s-verify'].forEach(s => document.getElementById(s).style.display = 'none');
+  document.getElementById('s-dash').style.display = 'block';
+  document.getElementById('pfooter').style.display = 'block';
+  document.getElementById('btnout').style.display = 'inline-block';
+  document.getElementById('upill').style.display = 'inline-block';
+  document.getElementById('rpill').style.display = 'inline-block';
+  document.getElementById('upill').textContent = currentUser?.email || '';
+}
+function err(id, msg) { const e = document.getElementById(id); e.textContent = msg; e.style.display = 'block'; e.className = 'emsg'; }
+function ok(id, msg) { const e = document.getElementById(id); e.textContent = msg; e.style.display = 'block'; e.className = 'okmsg'; }
+function setBtn(id, loading, label) { const b = document.getElementById(id); b.disabled = loading; b.innerHTML = loading ? '<span class="spin"></span>…' : label; }
+function xlat(msg) {
+  if (msg.includes('Invalid login')) return 'Email ou mot de passe incorrect.';
+  if (msg.includes('Invalid TOTP')) return 'Code incorrect.';
+  if (msg.includes('expired')) return 'Code expiré. Réessayez.';
+  return 'Erreur : ' + msg;
+}
+
+// ── AUTH ──
+sb.auth.onAuthStateChange(async (event, session) => {
+  if (!session) { showScreen('s-login'); return; }
+  currentUser = session.user;
+  if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') await checkMFA();
+});
+
+async function checkRole() {
+  const { data } = await sb.from('user_roles').select('role').eq('user_id', currentUser.id).single();
+  if (data?.role !== 'formateur') {
+    await sb.auth.signOut();
+    showScreen('s-login');
+    err('lerr', 'Accès réservé au formateur.');
+    return false;
+  }
+  return true;
+}
+
+async function checkMFA() {
+  const { data: { currentLevel, nextLevel } } = await sb.auth.mfa.getAuthenticatorAssuranceLevel();
+  if (currentLevel === 'aal2') {
+    if (await checkRole()) { showDash(); await loadAll(); }
+    return;
+  }
+  const { data: factors } = await sb.auth.mfa.listFactors();
+  const totps = factors?.totp || [];
+  if (totps.length === 0) { await startEnroll(); }
+  else { verifFactorId = totps[0].id; showScreen('s-verify'); }
+}
+
+async function doLogin(e) {
+  e.preventDefault();
+  setBtn('lbtn', true, 'Se connecter →');
+  document.getElementById('lerr').style.display = 'none';
+  const { error } = await sb.auth.signInWithPassword({
+    email: document.getElementById('lemail').value.trim(),
+    password: document.getElementById('lpwd').value
+  });
+  setBtn('lbtn', false, 'Se connecter →');
+  if (error) err('lerr', xlat(error.message));
+}
+
+async function startEnroll() {
+  const { data, error } = await sb.auth.mfa.enroll({ factorType: 'totp', issuer: 'North IT — Formateur' });
+  if (error) { showScreen('s-login'); err('lerr', 'Erreur MFA.'); return; }
+  enrollFactorId = data.id;
+  document.getElementById('qrbox').innerHTML = data.totp.qr_code;
+  document.getElementById('qrsecret').textContent = data.totp.secret;
+  const { data: ch } = await sb.auth.mfa.challenge({ factorId: enrollFactorId });
+  enrollChallengeId = ch.id;
+  showScreen('s-enroll');
+}
+
+async function doEnrollVerify() {
+  const code = document.getElementById('ecode').value.replace(/\s/g, '');
+  if (code.length !== 6) { err('eerr', 'Code à 6 chiffres requis.'); return; }
+  setBtn('ebtn', true, 'Activer →');
+  const { error } = await sb.auth.mfa.verify({ factorId: enrollFactorId, challengeId: enrollChallengeId, code });
+  setBtn('ebtn', false, 'Activer →');
+  if (error) { err('eerr', xlat(error.message)); return; }
+  if (await checkRole()) { showDash(); await loadAll(); }
+}
+
+async function doVerify() {
+  const code = document.getElementById('vcode').value.replace(/\s/g, '');
+  if (code.length !== 6) { err('verr', 'Code à 6 chiffres requis.'); return; }
+  setBtn('vbtn', true, 'Confirmer →');
+  const { data: ch, error: ce } = await sb.auth.mfa.challenge({ factorId: verifFactorId });
+  if (ce) { setBtn('vbtn', false, 'Confirmer →'); err('verr', xlat(ce.message)); return; }
+  const { error } = await sb.auth.mfa.verify({ factorId: verifFactorId, challengeId: ch.id, code });
+  setBtn('vbtn', false, 'Confirmer →');
+  if (error) { err('verr', xlat(error.message)); return; }
+  if (await checkRole()) { showDash(); await loadAll(); }
+}
+
+async function doLogout() { await sb.auth.signOut(); }
+
+// ── TABS ──
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tp-' + name).classList.add('active');
+}
+
+async function loadAll() {
+  await Promise.all([loadDocsList(), loadUsersList(), loadSigsList()]);
+}
+
+// ── DOCUMENTS ──
+function toggleAddForm() {
+  const f = document.getElementById('add-form');
+  f.classList.toggle('open');
+  if (f.classList.contains('open')) {
+    ['d-nom','d-desc','d-url','d-taille','d-note'].forEach(id => document.getElementById(id).value = '');
+    ['dadd-err','dadd-ok'].forEach(id => document.getElementById(id).style.display = 'none');
+  }
+}
+
+async function loadDocsList() {
+  const { data: docs, error } = await sb.from('documents').select('*').order('categorie').order('nom');
+  const out = document.getElementById('docs-list');
+  if (error || !docs?.length) { out.innerHTML = '<div class="empty-state">Aucun document. Cliquez "+ Ajouter".</div>'; return; }
+  const cats = {};
+  docs.forEach(d => { if (!cats[d.categorie]) cats[d.categorie] = []; cats[d.categorie].push(d); });
+  out.innerHTML = Object.keys(cats).map(cat => `
+    <div style="margin-bottom:8px;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);padding-top:12px">${cat}</div>
+    ${cats[cat].map(d => `
+      <div class="doc-row">
+        <div>
+          <div class="doc-row-name">${d.type === 'excel' ? '📊' : '📄'} ${d.nom}</div>
+          <div class="doc-row-meta">${d.taille || ''} ${d.note_admin ? '· ' + d.note_admin : ''}</div>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle" title="${d.visible ? 'Visible' : 'Masqué'}">
+            <input type="checkbox" ${d.visible ? 'checked' : ''} onchange="toggleDoc('${d.id}',this.checked)"/>
+            <span class="toggle-slider"></span>
+          </label>
+          ${d.visible ? '<span style="color:var(--green);font-size:.72rem;font-weight:700">Visible</span>' : '<span style="font-size:.72rem">Masqué</span>'}
+        </div>
+        <button class="btn-icon" onclick="editUrl('${d.id}','${d.url || ''}')">URL</button>
+        <button class="btn-icon btn-danger" onclick="deleteDoc('${d.id}','${d.nom}')">✕</button>
+      </div>`).join('')}`).join('');
+}
+
+async function toggleDoc(id, visible) {
+  await sb.from('documents').update({ visible, updated_at: new Date().toISOString() }).eq('id', id);
+  await loadDocsList();
+}
+
+async function editUrl(id, current) {
+  const url = prompt('URL Google Drive du document :', current);
+  if (!url) return;
+  await sb.from('documents').update({ url, updated_at: new Date().toISOString() }).eq('id', id);
+  await loadDocsList();
+}
+
+async function deleteDoc(id, nom) {
+  if (!confirm(`Supprimer "${nom}" ?`)) return;
+  await sb.from('documents').delete().eq('id', id);
+  await loadDocsList();
+}
+
+async function saveDoc() {
+  const nom = document.getElementById('d-nom').value.trim();
+  const url = document.getElementById('d-url').value.trim();
+  if (!nom || !url) { err('dadd-err', 'Nom et URL requis.'); return; }
+  setBtn('doc-save-btn', true); // handled inline below
+  const { error } = await sb.from('documents').insert({
+    nom,
+    description: document.getElementById('d-desc').value.trim() || null,
+    categorie: document.getElementById('d-cat').value,
+    url,
+    type: document.getElementById('d-type').value,
+    taille: document.getElementById('d-taille').value.trim() || null,
+    note_admin: document.getElementById('d-note').value.trim() || null,
+    visible: false
+  });
+  if (error) { err('dadd-err', 'Erreur : ' + error.message); return; }
+  ok('dadd-ok', 'Document ajouté. Il est masqué par défaut — activez-le avec le switch.');
+  ['d-nom','d-desc','d-url','d-taille','d-note'].forEach(id => document.getElementById(id).value = '');
+  await loadDocsList();
+}
+
+// ── PARTICIPANTS ──
+function toggleInviteForm() {
+  const f = document.getElementById('invite-form');
+  f.classList.toggle('open');
+  if (f.classList.contains('open')) {
+    ['inv-name','inv-email'].forEach(id => document.getElementById(id).value = '');
+    ['inv-err','inv-ok'].forEach(id => document.getElementById(id).style.display = 'none');
+  }
+}
+
+async function inviteUser() {
+  const name = document.getElementById('inv-name').value.trim();
+  const email = document.getElementById('inv-email').value.trim();
+  if (!name || !email) { err('inv-err', 'Nom et e-mail requis.'); return; }
+  setBtn('inv-btn', true, 'Envoyer l\'invitation');
+  const { data: session } = await sb.auth.getSession();
+  const res = await fetch('/.netlify/functions/invite-user', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.session.access_token}` },
+    body: JSON.stringify({ email, full_name: name, role: 'apprenant' })
+  });
+  const result = await res.json();
+  setBtn('inv-btn', false, 'Envoyer l\'invitation');
+  if (!res.ok) { err('inv-err', result.error || 'Erreur lors de l\'invitation.'); return; }
+  ok('inv-ok', `Invitation envoyée à ${email}. Il recevra un e-mail pour créer son accès.`);
+  document.getElementById('inv-name').value = '';
+  document.getElementById('inv-email').value = '';
+  await loadUsersList();
+}
+
+async function loadUsersList() {
+  const { data: roles, error } = await sb.from('user_roles').select('user_id, role, full_name, created_at').order('created_at', { ascending: false });
+  const out = document.getElementById('users-list');
+  if (error || !roles?.length) { out.innerHTML = '<div class="empty-state">Aucun participant. Utilisez "+ Inviter".</div>'; return; }
+  out.innerHTML = `<table class="table">
+    <thead><tr><th>Nom</th><th>Rôle</th><th>Ajouté le</th><th></th></tr></thead>
+    <tbody>${roles.map(r => `
+      <tr>
+        <td style="font-weight:600">${r.full_name || '—'}</td>
+        <td><span class="${r.role === 'formateur' ? 'badge-f' : 'badge-a'}">${r.role}</span></td>
+        <td style="color:var(--muted)">${new Date(r.created_at).toLocaleDateString('fr-FR')}</td>
+        <td>${r.role !== 'formateur' ? `<button class="btn-icon btn-danger" onclick="revokeUser('${r.user_id}','${r.full_name || r.user_id}')">Révoquer</button>` : ''}</td>
+      </tr>`).join('')}
+    </tbody>
+  </table>`;
+}
+
+async function revokeUser(userId, name) {
+  if (!confirm(`Révoquer l'accès de "${name}" ? Ils ne pourront plus se connecter.`)) return;
+  await sb.from('user_roles').delete().eq('user_id', userId);
+  await loadUsersList();
+}
+
+// ── SIGNATURES ──
+async function loadSigsList() {
+  const { data: sigs, error } = await sb.from('signatures').select('full_name, email, document_type, session_nom, signed_at').order('signed_at', { ascending: false });
+  const out = document.getElementById('sigs-list');
+  if (error || !sigs?.length) { out.innerHTML = '<div class="empty-state">Aucune signature reçue.</div>'; return; }
+  const labels = { engagement: 'Engagement de participation', emargement: 'Feuille d\'émargement', attestation: 'Attestation de fin de formation' };
+  out.innerHTML = `<table class="table">
+    <thead><tr><th>Signataire</th><th>Document</th><th>Signé le</th></tr></thead>
+    <tbody>${sigs.map(s => `
+      <tr>
+        <td><div style="font-weight:600">${s.full_name}</div><div style="color:var(--muted);font-size:.72rem">${s.email}</div></td>
+        <td><span class="badge-s">${labels[s.document_type] || s.document_type}</span></td>
+        <td style="color:var(--muted)">${new Date(s.signed_at).toLocaleString('fr-FR',{dateStyle:'short',timeStyle:'short'})}</td>
+      </tr>`).join('')}
+    </tbody>
+  </table>`;
+}
+</script>
+</body>
+</html>
