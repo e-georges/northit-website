@@ -1,4 +1,33 @@
+# North IT — Configuration Netlify
+
+# ─── Cache images WebP (1 an) ───────────────────────────────
 [[headers]]
   for = "/images/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# ─── Cache CSS et JS partagés ───────────────────────────────
+[[headers]]
+  for = "/northit.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/components.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# ─── Sécurité page apprenant (pas d'indexation) ─────────────
+[[headers]]
+  for = "/espace-apprenant.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+
+# ─── Sécurité documents.json (pas d'indexation directe) ─────
+[[headers]]
+  for = "/documents.json"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+    Cache-Control = "no-cache, no-store, must-revalidate"

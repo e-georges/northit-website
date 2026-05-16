@@ -1,0 +1,94 @@
+{
+  "session_nom": "Formation ITIL® 4 Foundation",
+  "message_accueil": "Bienvenue dans votre espace apprenant. Les documents sont mis à disposition progressivement au fil de la formation.",
+  "documents": [
+    {
+      "id": "prog-j1",
+      "nom": "Programme — Jour 1",
+      "description": "Fondamentaux ITIL® 4 et Système de Valeur des Services",
+      "categorie": "Supports de cours",
+      "type": "pdf",
+      "taille": "3.2 Mo",
+      "url": "REMPLACER_PAR_LIEN_GOOGLE_DRIVE",
+      "visible": false,
+      "note_admin": "Partager le lundi matin avant la session"
+    },
+    {
+      "id": "prog-j2",
+      "nom": "Programme — Jour 2",
+      "description": "Chaîne de valeur des services et pratiques ITIL®",
+      "categorie": "Supports de cours",
+      "type": "pdf",
+      "taille": "4.1 Mo",
+      "url": "REMPLACER_PAR_LIEN_GOOGLE_DRIVE",
+      "visible": false,
+      "note_admin": "Partager le mardi matin"
+    },
+    {
+      "id": "prog-j3",
+      "nom": "Programme — Jour 3",
+      "description": "Révisions, amélioration continue et préparation examen",
+      "categorie": "Supports de cours",
+      "type": "pdf",
+      "taille": "2.8 Mo",
+      "url": "REMPLACER_PAR_LIEN_GOOGLE_DRIVE",
+      "visible": false,
+      "note_admin": "Partager le mercredi matin"
+    },
+    {
+      "id": "fiche-memo",
+      "nom": "Fiche mémo — Concepts clés ITIL® 4",
+      "description": "Synthèse des 34 pratiques, 7 principes et SVS",
+      "categorie": "Supports de cours",
+      "type": "pdf",
+      "taille": "1.1 Mo",
+      "url": "REMPLACER_PAR_LIEN_GOOGLE_DRIVE",
+      "visible": false,
+      "note_admin": "Partager dès le Jour 1"
+    },
+    {
+      "id": "examen-blanc",
+      "nom": "Examen blanc — 40 QCM",
+      "description": "Conditions réelles de l'examen PeopleCert avec correction",
+      "categorie": "Préparation examen",
+      "type": "pdf",
+      "taille": "0.9 Mo",
+      "url": "REMPLACER_PAR_LIEN_GOOGLE_DRIVE",
+      "visible": false,
+      "note_admin": "Partager la veille de l'examen uniquement"
+    },
+    {
+      "id": "planning",
+      "nom": "Planning de la session",
+      "description": "Horaires, pauses et déroulé des 3 jours",
+      "categorie": "Organisation",
+      "type": "pdf",
+      "taille": "0.3 Mo",
+      "url": "REMPLACER_PAR_LIEN_GOOGLE_DRIVE",
+      "visible": false,
+      "note_admin": "Partager avant le début de la session"
+    },
+    {
+      "id": "fiche-connexion",
+      "nom": "Fiche de connexion PeopleCert",
+      "description": "Identifiants et instructions pour l'examen en ligne",
+      "categorie": "Organisation",
+      "type": "pdf",
+      "taille": "0.4 Mo",
+      "url": "REMPLACER_PAR_LIEN_GOOGLE_DRIVE",
+      "visible": false,
+      "note_admin": "Partager le Jour 3 matin uniquement"
+    },
+    {
+      "id": "suivi-excel",
+      "nom": "Grille de suivi de progression",
+      "description": "Tableau Excel de suivi personnel par pratique ITIL®",
+      "categorie": "Supports de cours",
+      "type": "excel",
+      "taille": "0.2 Mo",
+      "url": "REMPLACER_PAR_LIEN_GOOGLE_DRIVE",
+      "visible": false,
+      "note_admin": "Partager dès le Jour 1"
+    }
+  ]
+}

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Espace Apprenant | North IT – Formation ITIL® 4 Foundation</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="preconnect" href="https://api.fontshare.com"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,800,900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Supabase JS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#E8930A;
+  --amber-bg:rgba(232,147,10,.09);
+  --amber-bd:rgba(232,147,10,.22);
+  --navy:#07102A;
+  --text:#1A2B4A;
+  --muted:#5A6B8A;
+  --border:#E0E5EF;
+  --bg:#F5F7FC;
+  --white:#FFFFFF;
+  --green:#16A34A;
+  --red:#DC2626;
+  --red-bg:#FEF2F2;
+  --shadow:0 2px 8px rgba(10,22,40,.07);
+  --shadow-md:0 4px 20px rgba(10,22,40,.11);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;min-height:100vh;font-size:16px}
+
+/* ─── TOPBAR ─── */
+.topbar{
+  background:var(--white);border-bottom:1px solid var(--border);
+  padding:0 40px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 1px 6px rgba(10,22,40,.06);
+  position:sticky;top:0;z-index:100;
+}
+.topbar-logo{font-family:'Satoshi',sans-serif;font-weight:900;font-size:1.4rem;color:var(--text);text-decoration:none;letter-spacing:-.5px}
+.topbar-logo a{color:inherit;text-decoration:none}
+.topbar-right{display:flex;align-items:center;gap:14px}
+.user-pill{background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:100px;padding:5px 14px;font-size:.78rem;font-weight:600;color:var(--amber);display:none}
+.btn-logout{background:transparent;border:1.5px solid var(--border);color:var(--muted);padding:7px 16px;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;display:none}
+.btn-logout:hover{border-color:var(--red);color:var(--red)}
+
+/* ─── ÉCRAN LOGIN ─── */
+.screen-login{min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.login-card{
+  background:var(--white);border:1px solid var(--border);border-radius:16px;
+  padding:40px;width:100%;max-width:420px;
+  box-shadow:var(--shadow-md);position:relative;overflow:hidden;
+}
+.login-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber)}
+.login-brand{font-family:'Satoshi',sans-serif;font-weight:900;font-size:1.5rem;color:var(--text);letter-spacing:-.4px;margin-bottom:2px}
+.login-sub{font-size:.8rem;color:var(--muted);margin-bottom:28px}
+.login-divider{width:40px;height:2px;background:var(--amber);margin:0 0 24px}
+.login-title{font-family:'Satoshi',sans-serif;font-weight:800;font-size:1.2rem;color:var(--text);margin-bottom:6px}
+.login-desc{font-size:.85rem;color:var(--muted);line-height:1.65;margin-bottom:26px}
+
+.form-group{margin-bottom:16px}
+.form-label{display:block;font-size:.8rem;font-weight:700;color:var(--muted);margin-bottom:6px;letter-spacing:.2px}
+.form-input{
+  width:100%;background:var(--bg);
+  border:1.5px solid var(--border);border-radius:8px;
+  padding:11px 14px;color:var(--text);font-family:inherit;font-size:.92rem;
+  transition:border-color .2s,background .2s;
+}
+.form-input:focus{outline:none;border-color:var(--amber);background:var(--white)}
+.form-input.error{border-color:var(--red);background:var(--red-bg)}
+
+.btn-primary{
+  width:100%;background:var(--amber);color:var(--white);
+  border:none;padding:13px;border-radius:8px;
+  font-weight:800;font-size:.95rem;cursor:pointer;font-family:inherit;
+  transition:background .2s,transform .15s;
+  box-shadow:0 2px 12px rgba(232,147,10,.3);
+  margin-top:4px;
+}
+.btn-primary:hover{background:#D4820A;transform:translateY(-1px)}
+.btn-primary:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+.btn-secondary{
+  width:100%;background:transparent;color:var(--muted);
+  border:1.5px solid var(--border);padding:11px;border-radius:8px;
+  font-weight:600;font-size:.88rem;cursor:pointer;font-family:inherit;
+  transition:all .2s;margin-top:8px;
+}
+.btn-secondary:hover{border-color:var(--amber);color:var(--amber)}
+
+.error-msg{
+  background:var(--red-bg);border:1px solid #FECACA;border-radius:8px;
+  padding:10px 14px;font-size:.82rem;color:var(--red);margin-top:12px;
+  display:none;line-height:1.5;
+}
+.success-msg{
+  background:#F0FDF4;border:1px solid #BBF7D0;border-radius:8px;
+  padding:10px 14px;font-size:.82rem;color:var(--green);margin-top:12px;
+  display:none;line-height:1.5;
+}
+.link-btn{
+  background:none;border:none;color:var(--amber);font-size:.8rem;
+  font-weight:600;cursor:pointer;font-family:inherit;padding:0;
+  text-decoration:underline;text-underline-offset:3px;
+}
+.login-footer{text-align:center;margin-top:18px;font-size:.75rem;color:var(--muted)}
+.login-security{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:14px;font-size:.72rem;color:var(--muted)}
+
+/* ─── ÉCRAN DÉFINIR MOT DE PASSE (1ère connexion) ─── */
+.screen-setpass{min-height:calc(100vh - 64px);display:none;align-items:center;justify-content:center;padding:40px 20px}
+.setpass-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:40px;width:100%;max-width:420px;box-shadow:var(--shadow-md);position:relative;overflow:hidden}
+.setpass-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--green)}
+
+/* ─── ÉCRAN CONTENU ─── */
+.screen-content{display:none;flex-direction:column}
+.main{max-width:900px;margin:0 auto;padding:32px 40px;width:100%}
+
+.welcome-banner{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:12px;padding:20px 24px;
+  margin-bottom:24px;display:flex;align-items:flex-start;gap:14px;
+  box-shadow:var(--shadow);
+}
+.welcome-icon{font-size:2rem;flex-shrink:0;margin-top:2px}
+.welcome-text h2{font-family:'Satoshi',sans-serif;font-size:1.05rem;font-weight:800;color:var(--text);margin-bottom:4px}
+.welcome-text p{font-size:.83rem;color:var(--muted);line-height:1.6}
+
+.stats-row{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
+.stat-chip{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:9px 16px;font-size:.78rem;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow)}
+.stat-chip strong{font-family:'Satoshi',sans-serif;font-weight:800;color:var(--text)}
+.stat-chip span{color:var(--muted)}
+
+.category-block{margin-bottom:24px}
+.category-label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+
+.doc-list{display:flex;flex-direction:column;gap:8px}
+.doc-card{
+  background:var(--white);border:1px solid var(--border);border-radius:10px;
+  padding:14px 18px;display:flex;align-items:center;gap:14px;
+  box-shadow:var(--shadow);transition:all .2s;
+}
+.doc-card.available:hover{border-color:var(--amber-bd);box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.doc-card.locked{background:var(--bg);opacity:.7}
+
+.doc-icon{
+  width:42px;height:42px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;flex-shrink:0;
+}
+.doc-icon.pdf{background:#FEF2F2}
+.doc-icon.excel{background:#F0FDF4}
+.doc-icon.lock{background:var(--bg);border:1px solid var(--border)}
+
+.doc-info{flex:1;min-width:0}
+.doc-name{font-family:'Satoshi',sans-serif;font-weight:800;font-size:.88rem;color:var(--text);margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.doc-desc{font-size:.76rem;color:var(--muted);line-height:1.4;margin-bottom:4px}
+.doc-badges{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.badge{font-size:.65rem;font-weight:700;text-transform:uppercase;padding:2px 7px;border-radius:4px;letter-spacing:.3px}
+.badge.pdf{background:#FEF2F2;color:var(--red);border:1px solid #FECACA}
+.badge.excel{background:#F0FDF4;color:var(--green);border:1px solid #BBF7D0}
+.badge.size{background:var(--bg);color:var(--muted);border:1px solid var(--border)}
+
+.btn-download{
+  background:var(--amber);color:var(--white);
+  border:none;padding:8px 16px;border-radius:7px;
+  font-size:.78rem;font-weight:700;cursor:pointer;
+  text-decoration:none;display:inline-flex;align-items:center;gap:5px;
+  white-space:nowrap;transition:background .2s;font-family:inherit;
+  flex-shrink:0;
+}
+.btn-download:hover{background:#D4820A}
+.badge-soon{
+  background:var(--bg);border:1px solid var(--border);
+  color:var(--muted);padding:7px 14px;border-radius:7px;
+  font-size:.76rem;font-weight:600;white-space:nowrap;flex-shrink:0;
+}
+
+.empty-state{text-align:center;padding:56px 20px}
+.empty-state .e-icon{font-size:3rem;margin-bottom:14px}
+.empty-state h3{font-family:'Satoshi',sans-serif;font-weight:800;font-size:1rem;color:var(--text);margin-bottom:6px}
+.empty-state p{font-size:.85rem;color:var(--muted);max-width:320px;margin:0 auto;line-height:1.7}
+
+.loading-state{text-align:center;padding:60px;color:var(--muted);font-size:.88rem}
+
+.portal-footer{
+  text-align:center;padding:20px 40px;
+  font-size:.73rem;color:var(--muted);
+  border-top:1px solid var(--border);margin-top:32px;
+}
+.portal-footer a{color:var(--amber);text-decoration:none}
+
+/* Spinner */
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:#FFF;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:640px){
+  .topbar{padding:0 16px}
+  .main{padding:16px}
+  .doc-card{flex-wrap:wrap}
+  .btn-download,.badge-soon{width:100%;text-align:center;justify-content:center}
+  .stats-row{gap:8px}
+  .screen-login,.screen-setpass{padding:20px 16px;align-items:flex-start;padding-top:32px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-logo"><a href="index.html">North IT</a></div>
+  <div class="topbar-right">
+    <span class="user-pill" id="user-pill"></span>
+    <button class="btn-logout" id="btn-logout" onclick="handleLogout()">Se déconnecter</button>
+  </div>
+</div>
+
+<!-- ═══ ÉCRAN 1 : LOGIN ═══ -->
+<div class="screen-login" id="screen-login">
+  <div class="login-card">
+    <div class="login-brand">North IT</div>
+    <div class="login-sub">Formation ITIL® 4 Foundation</div>
+    <div class="login-divider"></div>
+    <div class="login-title">🔐 Espace Apprenant</div>
+    <p class="login-desc">Accédez à vos supports de cours, documents de formation et ressources partagées par votre formateur.</p>
+
+    <form id="form-login" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label class="form-label" for="input-email">Adresse e-mail</label>
+        <input class="form-input" id="input-email" type="email" placeholder="votre@email.fr" required autocomplete="email"/>
+      </div>
+      <div class="form-group" id="password-group">
+        <label class="form-label" for="input-password">Mot de passe</label>
+        <input class="form-input" id="input-password" type="password" placeholder="••••••••" required autocomplete="current-password"/>
+      </div>
+      <button class="btn-primary" type="submit" id="btn-submit-login">Se connecter →</button>
+      <button class="btn-secondary" type="button" onclick="showForgotPassword()">Mot de passe oublié / Première connexion</button>
+    </form>
+
+    <div class="error-msg" id="login-error"></div>
+    <div class="success-msg" id="login-success"></div>
+
+    <div class="login-footer">
+      Accès réservé aux participants inscrits par North IT.
+      <br>Pas encore d'accès ? <a href="mailto:e.georges@northit.fr" style="color:var(--amber)">Contacter le formateur</a>
+    </div>
+    <div class="login-security">🔒 Connexion sécurisée via Supabase · Données hébergées en Europe</div>
+  </div>
+</div>
+
+<!-- ═══ ÉCRAN 2 : DÉFINIR MOT DE PASSE (1ère connexion via lien d'invitation) ═══ -->
+<div class="screen-setpass" id="screen-setpass">
+  <div class="setpass-card">
+    <div class="login-brand" style="margin-bottom:4px">North IT</div>
+    <div class="login-sub">Espace Apprenant</div>
+    <div class="login-divider" style="background:var(--green)"></div>
+    <div class="login-title">✅ Bienvenue !</div>
+    <p class="login-desc">Vous avez rejoint l'espace apprenant North IT. Choisissez un mot de passe pour vos prochaines connexions.</p>
+
+    <form id="form-setpass" onsubmit="handleSetPassword(event)">
+      <div class="form-group">
+        <label class="form-label" for="new-password">Nouveau mot de passe</label>
+        <input class="form-input" id="new-password" type="password" placeholder="Minimum 8 caractères" required minlength="8" autocomplete="new-password"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="confirm-password">Confirmer le mot de passe</label>
+        <input class="form-input" id="confirm-password" type="password" placeholder="Répétez votre mot de passe" required autocomplete="new-password"/>
+      </div>
+      <button class="btn-primary" type="submit" id="btn-submit-setpass">Accéder à mes documents →</button>
+    </form>
+    <div class="error-msg" id="setpass-error"></div>
+  </div>
+</div>
+
+<!-- ═══ ÉCRAN 3 : CONTENU APPRENANT ═══ -->
+<div class="screen-content" id="screen-content">
+  <div class="main">
+
+    <div class="welcome-banner">
+      <div class="welcome-icon">📚</div>
+      <div class="welcome-text">
+        <h2 id="welcome-title">Bienvenue dans votre espace apprenant</h2>
+        <p id="welcome-message">Les documents sont mis à disposition progressivement au fil de la formation.</p>
+      </div>
+    </div>
+
+    <div class="stats-row" id="stats-row"></div>
+    <div id="docs-container"><div class="loading-state">Chargement des documents…</div></div>
+
+  </div>
+  <div class="portal-footer">
+    North IT · Formation ITIL® 4 Foundation · ATO agréé PeopleCert ·
+    <a href="mailto:e.georges@northit.fr">Contacter le formateur</a>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   ⚙️  CONFIGURATION — À REMPLIR AVEC VOS CLÉS SUPABASE
+   ══════════════════════════════════════════════════════ */
+const SUPABASE_URL  = 'https://muygrrpnrfppjdgcbobx.supabase.co';
+const SUPABASE_ANON = 'sb_publishable_mqC9jbz_pE5C4LB28no92A_I5mZfLwJ';
+
+/* ══════════════════════════════════════════════════════
+   Initialisation Supabase
+   ══════════════════════════════════════════════════════ */
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON, {
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true,
+  }
+});
+
+/* ══════════════════════════════════════════════════════
+   Gestion des états d'affichage
+   ══════════════════════════════════════════════════════ */
+function showScreen(name) {
+  document.getElementById('screen-login').style.display    = name === 'login'   ? 'flex' : 'none';
+  document.getElementById('screen-setpass').style.display  = name === 'setpass' ? 'flex' : 'none';
+  document.getElementById('screen-content').style.display  = name === 'content' ? 'flex' : 'none';
+  document.getElementById('btn-logout').style.display      = name === 'content' ? 'inline-block' : 'none';
+  document.getElementById('user-pill').style.display       = name === 'content' ? 'inline-block' : 'none';
+}
+
+function setUserPill(email) {
+  const pill = document.getElementById('user-pill');
+  pill.textContent = email;
+}
+
+/* ══════════════════════════════════════════════════════
+   Écoute des changements d'état Supabase
+   ══════════════════════════════════════════════════════ */
+sb.auth.onAuthStateChange(async (event, session) => {
+  console.log('Auth event:', event);
+
+  if (event === 'PASSWORD_RECOVERY' || event === 'USER_UPDATED') {
+    // Lien d'invitation ou reset password cliqué
+    showScreen('setpass');
+    return;
+  }
+
+  if (event === 'SIGNED_IN' && session) {
+    // Vérifier si c'est une première connexion via invitation (pas encore de mot de passe défini)
+    const meta = session.user.user_metadata;
+    if (meta?.invitation_accepted === false || meta?.needs_password) {
+      showScreen('setpass');
+    } else {
+      setUserPill(session.user.email);
+      showScreen('content');
+      await loadDocuments(session.user);
+    }
+    return;
+  }
+
+  if (event === 'SIGNED_OUT' || event === 'INITIAL_SESSION' && !session) {
+    showScreen('login');
+    return;
+  }
+
+  if (event === 'INITIAL_SESSION' && session) {
+    setUserPill(session.user.email);
+    showScreen('content');
+    await loadDocuments(session.user);
+  }
+});
+
+/* ══════════════════════════════════════════════════════
+   Connexion email + mot de passe
+   ══════════════════════════════════════════════════════ */
+async function handleLogin(e) {
+  e.preventDefault();
+  const email    = document.getElementById('input-email').value.trim();
+  const password = document.getElementById('input-password').value;
+  const btn      = document.getElementById('btn-submit-login');
+  const errEl    = document.getElementById('login-error');
+
+  errEl.style.display = 'none';
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Connexion…';
+
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+
+  btn.disabled = false;
+  btn.innerHTML = 'Se connecter →';
+
+  if (error) {
+    errEl.textContent = traductionErreur(error.message);
+    errEl.style.display = 'block';
+    document.getElementById('input-password').classList.add('error');
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   Mot de passe oublié / Première connexion
+   ══════════════════════════════════════════════════════ */
+function showForgotPassword() {
+  const email  = document.getElementById('input-email').value.trim();
+  const errEl  = document.getElementById('login-error');
+  const succEl = document.getElementById('login-success');
+
+  if (!email) {
+    errEl.textContent = 'Saisissez d\'abord votre adresse e-mail ci-dessus.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  errEl.style.display = 'none';
+  const btn = document.getElementById('btn-submit-login');
+  btn.disabled = true;
+
+  sb.auth.resetPasswordForEmail(email, {
+    redirectTo: window.location.origin + '/espace-apprenant.html'
+  }).then(({ error }) => {
+    btn.disabled = false;
+    if (error) {
+      errEl.textContent = traductionErreur(error.message);
+      errEl.style.display = 'block';
+    } else {
+      succEl.textContent = `Un e-mail de réinitialisation a été envoyé à ${email}. Vérifiez votre boîte de réception.`;
+      succEl.style.display = 'block';
+    }
+  });
+}
+
+/* ══════════════════════════════════════════════════════
+   Définir le mot de passe (1ère connexion)
+   ══════════════════════════════════════════════════════ */
+async function handleSetPassword(e) {
+  e.preventDefault();
+  const pwd1  = document.getElementById('new-password').value;
+  const pwd2  = document.getElementById('confirm-password').value;
+  const btn   = document.getElementById('btn-submit-setpass');
+  const errEl = document.getElementById('setpass-error');
+
+  errEl.style.display = 'none';
+
+  if (pwd1 !== pwd2) {
+    errEl.textContent = 'Les mots de passe ne correspondent pas.';
+    errEl.style.display = 'block';
+    return;
+  }
+  if (pwd1.length < 8) {
+    errEl.textContent = 'Le mot de passe doit contenir au moins 8 caractères.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Enregistrement…';
+
+  const { data, error } = await sb.auth.updateUser({ password: pwd1 });
+
+  btn.disabled = false;
+  btn.innerHTML = 'Accéder à mes documents →';
+
+  if (error) {
+    errEl.textContent = traductionErreur(error.message);
+    errEl.style.display = 'block';
+  } else {
+    setUserPill(data.user.email);
+    showScreen('content');
+    await loadDocuments(data.user);
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   Déconnexion
+   ══════════════════════════════════════════════════════ */
+async function handleLogout() {
+  await sb.auth.signOut();
+}
+
+/* ══════════════════════════════════════════════════════
+   Chargement et affichage des documents
+   ══════════════════════════════════════════════════════ */
+async function loadDocuments(user) {
+  const container = document.getElementById('docs-container');
+  const statsRow  = document.getElementById('stats-row');
+
+  // Message de bienvenue personnalisé
+  const prenom = user.user_metadata?.full_name?.split(' ')[0] || user.email.split('@')[0];
+  document.getElementById('welcome-title').textContent = `Bonjour ${prenom} 👋`;
+
+  try {
+    const res = await fetch('documents.json?nc=' + Date.now());
+    if (!res.ok) throw new Error('Fichier documents.json introuvable');
+    const config = await res.json();
+
+    if (config.message_accueil) {
+      document.getElementById('welcome-message').textContent = config.message_accueil;
+    }
+
+    const docs        = config.documents || [];
+    const nbVisible   = docs.filter(d => d.visible).length;
+    const nbVerrouil  = docs.filter(d => !d.visible).length;
+
+    // Statistiques
+    statsRow.innerHTML = `
+      <div class="stat-chip">
+        <strong>${nbVisible}</strong>
+        <span>document${nbVisible > 1 ? 's' : ''} disponible${nbVisible > 1 ? 's' : ''}</span>
+      </div>
+      ${nbVerrouil > 0 ? `<div class="stat-chip"><strong>${nbVerrouil}</strong><span>à venir</span></div>` : ''}
+      <div class="stat-chip"><strong>ITIL® 4 Foundation</strong></div>
+    `;
+
+    if (docs.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="e-icon">📂</div>
+          <h3>Aucun document disponible</h3>
+          <p>Votre formateur n'a pas encore ajouté de documents. Revenez prochainement.</p>
+        </div>`;
+      return;
+    }
+
+    // Grouper par catégorie
+    const cats = {};
+    const catOrder = ['Organisation', 'Supports de cours', 'Préparation examen'];
+    docs.forEach(d => {
+      const c = d.categorie || 'Documents';
+      if (!cats[c]) cats[c] = [];
+      cats[c].push(d);
+    });
+    const orderedCats = [
+      ...catOrder.filter(c => cats[c]),
+      ...Object.keys(cats).filter(c => !catOrder.includes(c))
+    ];
+
+    let html = '';
+    orderedCats.forEach(cat => {
+      html += `<div class="category-block"><div class="category-label">${cat}</div><div class="doc-list">`;
+      cats[cat].forEach(doc => {
+        const isExcel = doc.type === 'excel';
+        if (doc.visible) {
+          html += `
+          <div class="doc-card available">
+            <div class="doc-icon ${isExcel ? 'excel' : 'pdf'}">${isExcel ? '📊' : '📄'}</div>
+            <div class="doc-info">
+              <div class="doc-name">${doc.nom}</div>
+              ${doc.description ? `<div class="doc-desc">${doc.description}</div>` : ''}
+              <div class="doc-badges">
+                <span class="badge ${isExcel ? 'excel' : 'pdf'}">${isExcel ? 'Excel' : 'PDF'}</span>
+                ${doc.taille ? `<span class="badge size">${doc.taille}</span>` : ''}
+              </div>
+            </div>
+            <a href="${doc.url}" target="_blank" rel="noopener" class="btn-download">⬇&nbsp;Télécharger</a>
+          </div>`;
+        } else {
+          html += `
+          <div class="doc-card locked">
+            <div class="doc-icon lock">🔒</div>
+            <div class="doc-info">
+              <div class="doc-name" style="color:var(--muted)">${doc.nom}</div>
+              ${doc.description ? `<div class="doc-desc">${doc.description}</div>` : ''}
+              <div class="doc-badges">
+                <span class="badge ${isExcel ? 'excel' : 'pdf'}">${isExcel ? 'Excel' : 'PDF'}</span>
+              </div>
+            </div>
+            <span class="badge-soon">🕐 Prochainement</span>
+          </div>`;
+        }
+      });
+      html += `</div></div>`;
+    });
+
+    container.innerHTML = html;
+
+  } catch (err) {
+    console.error(err);
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="e-icon">⚠️</div>
+        <h3>Erreur de chargement</h3>
+        <p>Impossible de charger les documents. Actualisez la page ou contactez votre formateur.</p>
+      </div>`;
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   Traduction des messages d'erreur Supabase
+   ══════════════════════════════════════════════════════ */
+function traductionErreur(msg) {
+  const errors = {
+    'Invalid login credentials':       'Email ou mot de passe incorrect.',
+    'Email not confirmed':             'Votre e-mail n\'est pas encore confirmé. Vérifiez votre boîte de réception.',
+    'User not found':                  'Aucun compte trouvé avec cet e-mail.',
+    'Password should be at least':     'Le mot de passe doit contenir au moins 8 caractères.',
+    'Unable to validate email':        'Adresse e-mail invalide.',
+    'Email rate limit exceeded':       'Trop de tentatives. Réessayez dans quelques minutes.',
+    'Token has expired':               'Le lien a expiré. Demandez un nouveau lien ci-dessous.',
+  };
+  for (const [key, value] of Object.entries(errors)) {
+    if (msg.includes(key)) return value;
+  }
+  return 'Une erreur s\'est produite. Veuillez réessayer.';
+}
+</script>
+</body>
+</html>
