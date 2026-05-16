@@ -342,6 +342,9 @@ async function doEnrollVerify() {
   const { error } = await sb.auth.mfa.verify({ factorId: enrollFactorId, challengeId: enrollChallengeId, code });
   setBtn('ebtn', false, 'Activer →');
   if (error) { err('eerr', xlat(error.message)); return; }
+  await sb.auth.refreshSession();
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) currentUser = session.user;
   if (await checkRole()) { showDash(); await loadAll(); }
 }
 
@@ -354,6 +357,9 @@ async function doVerify() {
   const { error } = await sb.auth.mfa.verify({ factorId: verifFactorId, challengeId: ch.id, code });
   setBtn('vbtn', false, 'Confirmer →');
   if (error) { err('verr', xlat(error.message)); return; }
+  await sb.auth.refreshSession();
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) currentUser = session.user;
   if (await checkRole()) { showDash(); await loadAll(); }
 }
 
