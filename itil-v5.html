@@ -3,425 +3,172 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>ITIL® V5 – Le nouveau framework des services numériques | North IT</title>
-<meta name="description" content="Tout savoir sur ITIL® V5 (ITIL® Foundation Version 5) : nouveautés, différences avec ITIL® 4, compétences, métiers ciblés et format de l'examen PeopleCert."/>
-<meta name="keywords" content="ITIL® V5, ITIL® Foundation Version 5, nouveau ITIL® 2025, ITIL® V5 vs ITIL® 4, certification ITIL® V5, framework ITSM 2025"/>
+<title>ITIL® V5 – Nouveautés, différences avec ITIL 4, formation | North IT</title>
+<meta name="description" content="Tout savoir sur ITIL® V5 : nouveautés, différences avec ITIL 4, transition, certification. North IT est l'un des premiers ATO à proposer une page dédiée à ITIL V5 en France."/>
+<meta name="keywords" content="ITIL V5, ITIL 5, ITIL V5 formation, ITIL V5 certification, différence ITIL 4 ITIL 5, transition ITIL V5, ITIL next generation"/>
 <meta name="robots" content="index, follow"/>
-<meta name="author" content="North IT"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="ITIL® V5 – Tout comprendre sur le nouveau framework | North IT"/>
-<meta property="og:description" content="Tout savoir sur ITIL® V5 (ITIL® Foundation Version 5) : nouveautés, différences avec ITIL® 4, compétences, métiers ciblés et format de l'examen PeopleCert."/>
-<meta property="og:url" content="https://northit.fr/itil-v5"/>
-<meta property="og:site_name" content="North IT"/>
-<meta property="og:locale" content="fr_FR"/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="ITIL® V5 – Tout comprendre sur le nouveau framework | North IT"/>
-<meta name="twitter:description" content="Tout savoir sur ITIL® V5 (ITIL® Foundation Version 5) : nouveautés, différences avec ITIL® 4, compétences, métiers ciblés et format de l'examen PeopleCert."/>
-<link rel="canonical" href="https://northit.fr/itil-v5"/>
-
-
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700;800;900&family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#07102A;--deep:#0B1A3E;--blue:#1446A0;--cyan:#00AADD;--white:#F4F7FF;--muted:#8A9BC4;--card:#0F1F4A;--border:rgba(0,170,221,.15);--green:#22c55e}
-html{scroll-behavior:smooth}
-body{font-family:'Nunito Sans',sans-serif;background:var(--navy);color:var(--white);line-height:1.65;overflow-x:hidden}
-
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:70px;background:rgba(7,16,42,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
-.nav-logo img{height:48px;width:auto}
-.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-links a{color:rgba(244,247,255,.65);text-decoration:none;font-size:.88rem;font-weight:600;transition:color .2s}
-.nav-links a:hover{color:var(--white)}
-.nav-active{color:var(--white)!important}
-.nav-cta{background:var(--cyan)!important;color:var(--navy)!important;padding:9px 22px;border-radius:6px;font-weight:700!important}
-
-.page-hero{padding:120px 5% 80px;background:linear-gradient(135deg,var(--deep) 0%,rgba(20,70,160,.35) 100%);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
-.page-hero::before{content:'';position:absolute;inset:0;opacity:.04;background-image:linear-gradient(rgba(0,170,221,1) 1px,transparent 1px),linear-gradient(90deg,rgba(0,170,221,1) 1px,transparent 1px);background-size:54px 54px}
-.hero-inner{position:relative;z-index:1;max-width:800px}
-.breadcrumb{font-size:.78rem;color:var(--muted);margin-bottom:16px}
-.breadcrumb a{color:var(--cyan);text-decoration:none}
-.breadcrumb span{margin:0 8px;opacity:.4}
-.page-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(0,170,221,.1);border:1px solid rgba(0,170,221,.25);border-radius:100px;padding:5px 16px;font-size:.75rem;font-weight:700;color:var(--cyan);margin-bottom:20px;text-transform:uppercase;letter-spacing:.5px}
-h1{font-family:'Raleway',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;line-height:1.1;letter-spacing:-1.5px;margin-bottom:18px}
-h1 em{color:var(--cyan);font-style:normal}
-.hero-desc{color:var(--muted);font-size:.97rem;max-width:640px;line-height:1.75;margin-bottom:28px}
-.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
-.pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:5px 14px;font-size:.78rem;font-weight:600}
-.pill.hi{background:rgba(0,170,221,.12);border-color:rgba(0,170,221,.3);color:var(--cyan)}
-.btn-main{background:var(--cyan);color:var(--navy);padding:14px 30px;border-radius:8px;font-weight:800;font-size:.95rem;text-decoration:none;display:inline-block;box-shadow:0 0 28px rgba(0,170,221,.35)}
-.btn-out{background:transparent;color:var(--white);padding:14px 30px;border-radius:8px;font-weight:600;font-size:.95rem;text-decoration:none;border:1.5px solid rgba(255,255,255,.2);display:inline-block;margin-left:12px}
-
-.page-body{max-width:1100px;margin:0 auto;padding:80px 5%;display:flex;flex-direction:column;gap:80px}
-.sec-tag{font-size:.7rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:10px}
-h2{font-family:'Raleway',sans-serif;font-size:clamp(1.5rem,2.8vw,2rem);font-weight:900;letter-spacing:-1px;line-height:1.15;margin-bottom:14px}
-.sec-sub{color:var(--muted);font-size:.93rem;line-height:1.75;margin-bottom:40px}
-
-/* INTRO */
-.intro-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-.intro-text p{color:rgba(244,247,255,.8);font-size:.93rem;line-height:1.8;margin-bottom:16px}
-.intro-text strong{color:var(--white)}
-.version-card{background:linear-gradient(135deg,rgba(20,70,160,.4),rgba(0,170,221,.1));border:1px solid rgba(0,170,221,.3);border-radius:16px;padding:28px 24px}
-.version-title{font-family:'Raleway',sans-serif;font-weight:800;font-size:1rem;color:var(--cyan);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
-.version-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.85rem}
-.version-row:last-child{border-bottom:none}
-.version-key{color:var(--muted);font-weight:600}
-.version-val{color:var(--white);font-weight:700}
-.version-badge{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);border-radius:100px;padding:2px 10px;font-size:.72rem;font-weight:700;color:var(--green)}
-
-/* PILLIERS */
-.pilliers-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.pillier-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 24px;position:relative;overflow:hidden;transition:transform .25s,border-color .25s}
-.pillier-card:hover{transform:translateY(-4px);border-color:rgba(0,170,221,.4)}
-.pillier-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--blue));opacity:0;transition:opacity .25s}
-.pillier-card:hover::before{opacity:1}
-.pillier-icon{font-size:1.8rem;margin-bottom:14px}
-.pillier-title{font-family:'Raleway',sans-serif;font-weight:800;font-size:.98rem;margin-bottom:8px}
-.pillier-desc{font-size:.83rem;color:var(--muted);line-height:1.65}
-
-/* APPRENTISSAGE */
-.learn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.learn-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start}
-.learn-dot{width:28px;height:28px;border-radius:7px;background:rgba(0,170,221,.15);border:1px solid rgba(0,170,221,.3);display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--cyan);font-weight:800;flex-shrink:0}
-.learn-text{font-size:.83rem;color:rgba(244,247,255,.82);line-height:1.55}
-.learn-text strong{color:var(--white);display:block;margin-bottom:3px;font-size:.85rem}
-
-/* COMPETENCES */
-.skills-layout{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.skill-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px 20px;text-align:center}
-.skill-icon{font-size:2rem;margin-bottom:12px}
-.skill-title{font-family:'Raleway',sans-serif;font-weight:800;font-size:.9rem;margin-bottom:8px}
-.skill-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
-
-/* METIERS */
-.metiers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.metier-item{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:.8rem;color:rgba(244,247,255,.75);display:flex;align-items:center;gap:8px}
-.metier-item::before{content:'◆';color:var(--cyan);font-size:.55rem;flex-shrink:0}
-
-/* EXAM */
-.exam-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.exam-item{text-align:center}
-.exam-icon{font-size:1.5rem;margin-bottom:10px}
-.exam-val{font-family:'Raleway',sans-serif;font-size:1.6rem;font-weight:900;color:var(--cyan);margin-bottom:4px}
-.exam-label{font-size:.75rem;color:var(--muted);line-height:1.4}
-
-/* ITIL®4 vs V5 */
-.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.compare-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 24px}
-.compare-card.new{border-color:rgba(0,170,221,.3);background:linear-gradient(135deg,var(--card),rgba(0,170,221,.05))}
-.compare-title{font-family:'Raleway',sans-serif;font-weight:800;font-size:.95rem;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.compare-badge{font-size:.68rem;padding:2px 8px;border-radius:100px;font-weight:700}
-.badge-old{background:rgba(255,255,255,.08);color:var(--muted)}
-.badge-new{background:rgba(0,170,221,.15);color:var(--cyan)}
-.compare-list{list-style:none;display:flex;flex-direction:column;gap:8px}
-.compare-list li{font-size:.83rem;color:rgba(244,247,255,.75);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
-.compare-list li::before{content:'→';color:var(--cyan);flex-shrink:0;margin-top:1px}
-.compare-card:not(.new) .compare-list li::before{color:var(--muted)}
-
-/* CTA */
-.cta-band{background:linear-gradient(135deg,var(--blue),#0c2060);padding:64px 5%;text-align:center;position:relative;overflow:hidden}
-.cta-band::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:600px;height:400px;border-radius:50%;background:rgba(0,170,221,.07);pointer-events:none}
-.cta-band h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:10px;position:relative}
-.cta-band p{color:rgba(255,255,255,.7);font-size:.93rem;margin-bottom:28px;position:relative}
-.cta-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;position:relative}
-.cta-white{background:white;color:var(--blue);padding:14px 32px;border-radius:8px;font-weight:800;text-decoration:none;font-size:.95rem}
-.cta-ghost{background:transparent;color:white;padding:14px 32px;border-radius:8px;font-weight:700;text-decoration:none;font-size:.95rem;border:1.5px solid rgba(255,255,255,.3)}
-
-footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding:40px 5% 28px}
-.foot-nav{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:20px}
-.foot-nav a{color:rgba(244,247,255,.45);text-decoration:none;font-size:.85rem;font-weight:600;transition:color .2s}
-.foot-nav a:hover{color:var(--cyan)}
-.foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.75rem;color:rgba(244,247,255,.3);border-top:1px solid rgba(255,255,255,.06);padding-top:20px}
-.foot-bottom a{color:rgba(244,247,255,.3);text-decoration:none}
-
-@media(max-width:900px){
-  .nav-links{display:none}
-  .intro-layout,.compare-grid,.pilliers-grid{grid-template-columns:1fr}
-  .learn-grid,.skills-layout{grid-template-columns:1fr 1fr}
-  .metiers-grid{grid-template-columns:repeat(2,1fr)}
-  .exam-card{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:580px){
-  .learn-grid,.skills-layout,.metiers-grid{grid-template-columns:1fr}
-  .exam-card{grid-template-columns:1fr}
-}
-</style>
-<!-- Microsoft Clarity -->
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wu32rf8eub");
+<link rel="canonical" href="https://northit.fr/itil-v5.html"/>
+<link rel="preconnect" href="https://api.fontshare.com"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,800,900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="northit.css"/>
+<script src="components.js"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://northit.fr/"},{"@type":"ListItem","position":2,"name":"ITIL® V5","item":"https://northit.fr/itil-v5.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qu'est-ce qu'ITIL® V5 ?","acceptedAnswer":{"@type":"Answer","text":"ITIL® V5 (ou ITIL 5) est la prochaine évolution majeure du référentiel ITIL, qui étend la gestion des services IT à l'ensemble des produits et services numériques, intégrant les notions de valeur, de durabilité et d'écosystème numérique."}},{"@type":"Question","name":"Quelle est la différence entre ITIL 4 et ITIL V5 ?","acceptedAnswer":{"@type":"Answer","text":"ITIL 4 se concentre sur la co-création de valeur et le Système de Valeur des Services. ITIL V5 va plus loin en intégrant l'ensemble de l'écosystème numérique, la durabilité, l'IA et les nouvelles formes de collaboration homme-machine."}},{"@type":"Question","name":"Faut-il attendre ITIL V5 pour se former ?","acceptedAnswer":{"@type":"Answer","text":"Non. La certification ITIL 4 Foundation reste la référence internationale et le prérequis pour toute évolution vers ITIL V5. Se certifier maintenant est le meilleur investissement."}}]}]}
 </script>
+<style>
+.itil-compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px}
+.compare-card{border-radius:12px;padding:24px;border:1px solid var(--border)}
+.compare-card.v4{background:#F0F4FF;border-color:#C7D2FE}
+.compare-card.v5{background:var(--amber-bg);border-color:var(--amber-bd)}
+.compare-title{font-family:'Satoshi',sans-serif;font-weight:900;font-size:1rem;margin-bottom:14px}
+.compare-card.v4 .compare-title{color:#2563EB}
+.compare-card.v5 .compare-title{color:var(--amber)}
+@media(max-width:768px){.itil-compare{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html"><img src="data:image/png;base64,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" alt="North IT – Votre partenaire formation" style="height:48px"/></a>
-  <ul class="nav-links">
-    <li><a href="itil-v5.html" style="color:var(--white)">ITIL® V5</a></li>
-    <li><a href="formation.html">Notre formation</a></li>
-    <li><a href="references.html">Références</a></li>
-    <li><a href="about.html">Qui sommes-nous ?</a></li>
-    <li><a href="contact.html" class="nav-cta">Nous contacter</a></li>
-  </ul>
-</nav>
+<div class="breadcrumb-bar"><div class="breadcrumb-inner"><a href="index.html">Accueil</a><span>›</span>ITIL® V5</div></div>
 
+<!-- PAGE HEADER -->
 <div class="page-hero">
-  <div class="hero-inner">
-    <div class="breadcrumb"><a href="index.html">Accueil</a><span>›</span>ITIL® V5</div>
-    <div class="page-tag">Nouveau framework · 2025</div>
-    <h1>ITIL® V5 — <em>Foundation</em><br>Version 5</h1>
-    <p class="hero-desc">Le référentiel mondial de gestion des services IT fait sa mue. ITIL® V5 intègre nativement l'intelligence artificielle, l'automatisation et une vision centrée sur le cycle de vie complet des produits et services numériques.</p>
-    <div class="hero-pills">
-      <span class="pill hi">Nouveau en 2025</span>
-      <span class="pill">Délivré par PeopleCert</span>
-      <span class="pill">Reconnu mondialement</span>
-      <span class="pill">Renouvellement tous les 3 ans</span>
+  <div class="page-hero-inner" style="display:grid;grid-template-columns:1fr 320px;gap:32px;align-items:start">
+    <div>
+      <div class="badges">
+        <span class="badge badge-amber">🔭 Prochaine évolution ITIL®</span>
+        <span class="badge badge-green">✓ North IT — ATO PeopleCert</span>
+        <span class="badge badge-gray">📅 Mise à jour 2025</span>
+      </div>
+      <h1>ITIL® V5<br>La prochaine évolution du référentiel</h1>
+      <p class="lead">Tout ce que vous devez savoir sur ITIL® V5 : nouveautés, différences avec ITIL 4, calendrier de déploiement, et comment vous préparer dès maintenant.</p>
+      <div style="margin-bottom:20px">
+        <a href="formation.html" class="btn btn-amber" style="margin-right:10px">Se former à ITIL® 4 maintenant →</a>
+        <a href="contact.html" class="btn btn-outline">Nous contacter</a>
+      </div>
     </div>
-    <a href="formation.html" class="btn-main">Se former &amp; certifier ITIL® avec North IT →</a>
-    <a href="#intro" class="btn-out">En savoir plus</a>
+    <!-- TIME France card -->
+    <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:4px">
+      <div style="background:var(--navy);padding:10px 16px"><span style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:#FFFFFF">Ils parlent de nous</span></div>
+      <div style="padding:16px">
+        <div style="font-family:'Satoshi',sans-serif;font-weight:900;font-size:1.25rem;color:#FFFFFF;background:var(--navy);margin:-16px -16px 12px;padding:8px 16px">TIME France</div>
+        <p style="font-size:.8rem;font-style:italic;color:var(--muted);line-height:1.7;margin-bottom:12px">« North IT et la formation ITIL® : l'IT comme accélérateur de performance. »</p>
+        <a href="https://www.timefrance.fr/les-temps-forts-partner-content/north-it-et-la-formation-itil-lit-comme-accelerateur-de-performance/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:6px;padding:8px 12px;color:var(--amber);font-size:.76rem;font-weight:700;text-decoration:none">📰 Lire l'article complet →</a>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="page-body">
+<!-- CONTENU PRINCIPAL -->
+<section class="section section-soft">
+  <div class="section-inner" style="display:grid;grid-template-columns:1fr 320px;gap:32px;align-items:start">
 
-  <!-- INTRO -->
-  <div id="intro">
-    <span class="sec-tag">Qu'est-ce qu'ITIL® V5 ?</span>
-    <h2>Une évolution majeure pour l'ère numérique</h2>
-    <div class="intro-layout">
-      <div class="intro-text">
-        <p>ITIL® (Information Technology Infrastructure Library) est le référentiel de bonnes pratiques le plus utilisé au monde pour la gestion des services informatiques. Depuis ses origines dans les années 1980, il a évolué pour s'adapter aux réalités du digital.</p>
-        <p><strong>ITIL® V5</strong>, officiellement nommé <em>ITIL® Foundation (Version 5)</em> et délivré par PeopleCert, marque une rupture avec les versions précédentes. Il ne s'agit plus uniquement de gérer une infrastructure IT — il s'agit de <strong>piloter des produits et services numériques</strong> dans un environnement marqué par l'IA, l'automatisation et l'agilité.</p>
-        <p>Pour les professionnels IT, ITIL® V5 offre un langage commun, une structure claire et des pratiques immédiatement applicables pour aligner les équipes IT sur les objectifs métiers et créer de la valeur mesurable.</p>
+    <!-- GAUCHE -->
+    <div>
+      <div class="panel-card">
+        <h3>Qu'est-ce qu'ITIL® V5 ?</h3>
+        <p style="color:var(--muted);font-size:.92rem;line-height:1.85;margin-bottom:14px">ITIL® V5 (également appelé ITIL 5) représente la prochaine évolution majeure du référentiel de gestion des services IT développé par Axelos et PeopleCert. Alors qu'ITIL 4 avait marqué une rupture importante en 2019 en introduisant le Système de Valeur des Services (SVS) et en s'alignant sur les pratiques Agile et DevOps, ITIL V5 va encore plus loin.</p>
+        <p style="color:var(--muted);font-size:.92rem;line-height:1.85">ITIL V5 intègre l'ensemble de l'<strong style="color:var(--text)">écosystème numérique</strong> : intelligence artificielle, automatisation, durabilité des systèmes d'information, et nouvelles formes de collaboration entre humains et machines. Le référentiel évolue d'une vision centrée sur les services IT vers une vision globale des <strong style="color:var(--text)">produits et services numériques</strong>.</p>
       </div>
-      <div class="version-card">
-        <div class="version-title">📋 ITIL® Foundation (Version 5) — En bref</div>
-        <div class="version-row"><span class="version-key">Éditeur</span><span class="version-val">PeopleCert</span></div>
-        <div class="version-row"><span class="version-key">Lancé en</span><span class="version-val">2025 <span class="version-badge">Nouveau</span></span></div>
-        <div class="version-row"><span class="version-key">Niveau</span><span class="version-val">Foundation (entrée)</span></div>
-        <div class="version-row"><span class="version-key">Examen</span><span class="version-val">40 QCM · 60 min</span></div>
-        <div class="version-row"><span class="version-key">Score requis</span><span class="version-val">65% (26/40)</span></div>
-        <div class="version-row"><span class="version-key">Renouvellement</span><span class="version-val">Tous les 3 ans</span></div>
-        <div class="version-row"><span class="version-key">Reconnu</span><span class="version-val">Mondialement</span></div>
+
+      <div class="panel-card">
+        <h3>ITIL 4 vs ITIL® V5 — les différences clés</h3>
+        <div class="itil-compare">
+          <div class="compare-card v4">
+            <div class="compare-title">ITIL® 4 (actuel)</div>
+            <ul class="check-list">
+              <li class="check-item"><span style="color:#2563EB;font-weight:700">→</span><span>Système de Valeur des Services (SVS)</span></li>
+              <li class="check-item"><span style="color:#2563EB;font-weight:700">→</span><span>34 pratiques de gestion</span></li>
+              <li class="check-item"><span style="color:#2563EB;font-weight:700">→</span><span>Alignement Agile & DevOps</span></li>
+              <li class="check-item"><span style="color:#2563EB;font-weight:700">→</span><span>Co-création de valeur</span></li>
+              <li class="check-item"><span style="color:#2563EB;font-weight:700">→</span><span>4 dimensions de la gestion</span></li>
+            </ul>
+          </div>
+          <div class="compare-card v5">
+            <div class="compare-title">ITIL® V5 (à venir)</div>
+            <ul class="check-list">
+              <li class="check-item"><span style="color:var(--amber);font-weight:700">→</span><span>Écosystème numérique global</span></li>
+              <li class="check-item"><span style="color:var(--amber);font-weight:700">→</span><span>Intégration IA & automatisation</span></li>
+              <li class="check-item"><span style="color:var(--amber);font-weight:700">→</span><span>Durabilité des SI</span></li>
+              <li class="check-item"><span style="color:var(--amber);font-weight:700">→</span><span>Collaboration homme-machine</span></li>
+              <li class="check-item"><span style="color:var(--amber);font-weight:700">→</span><span>Vision produits & services numériques</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <h3>Faut-il attendre ITIL® V5 pour se former ?</h3>
+        <p style="color:var(--muted);font-size:.92rem;line-height:1.85;margin-bottom:14px"><strong style="color:var(--text)">Non.</strong> La certification ITIL® 4 Foundation reste la référence internationale incontournable et sera le <strong style="color:var(--text)">prérequis obligatoire</strong> pour accéder aux certifications ITIL V5. Se certifier maintenant est le meilleur investissement.</p>
+        <p style="color:var(--muted);font-size:.92rem;line-height:1.85;margin-bottom:20px">De plus, les fondamentaux couverts par ITIL 4 Foundation — SVS, chaîne de valeur, 34 pratiques, 7 principes directeurs — restent au cœur d'ITIL V5. Votre certification ne sera pas obsolète.</p>
+        <a href="formation.html" class="btn btn-amber">Voir la formation ITIL® 4 Foundation →</a>
+      </div>
+
+      <div class="panel-card">
+        <h3>FAQ — Questions fréquentes sur ITIL® V5</h3>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="border-bottom:1px solid var(--border);padding-bottom:16px">
+            <div style="font-weight:700;color:var(--text);margin-bottom:6px;font-size:.92rem">Quand ITIL® V5 sera-t-il disponible ?</div>
+            <p style="font-size:.85rem;color:var(--muted);line-height:1.65">PeopleCert n'a pas encore annoncé de date officielle de disponibilité des certifications ITIL V5. North IT suit l'actualité PeopleCert et informera ses clients dès les premières annonces.</p>
+          </div>
+          <div style="border-bottom:1px solid var(--border);padding-bottom:16px">
+            <div style="font-weight:700;color:var(--text);margin-bottom:6px;font-size:.92rem">Ma certification ITIL 4 sera-t-elle encore valable avec ITIL V5 ?</div>
+            <p style="font-size:.85rem;color:var(--muted);line-height:1.65">Oui. Comme lors de la transition ITIL v3 → ITIL 4, PeopleCert proposera des parcours de transition. Votre certification ITIL 4 Foundation sera reconnue et vous donnera accès aux modules de transition V5.</p>
+          </div>
+          <div>
+            <div style="font-weight:700;color:var(--text);margin-bottom:6px;font-size:.92rem">North IT proposera-t-il une formation ITIL® V5 ?</div>
+            <p style="font-size:.85rem;color:var(--muted);line-height:1.65">Oui. En tant qu'ATO agréé PeopleCert, North IT proposera les formations ITIL V5 dès leur disponibilité officielle. Contactez-nous pour être informé en priorité.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- 4 PILLIERS -->
-  <div>
-    <span class="sec-tag">Les piliers d'ITIL® V5</span>
-    <h2>Ce que ITIL® V5 apporte de nouveau</h2>
-    <p class="sec-sub">ITIL® V5 recentre la gestion des services IT autour de quatre grandes thématiques adaptées aux enjeux contemporains.</p>
-    <div class="pilliers-grid">
-      <div class="pillier-card">
-        <div class="pillier-icon">📦</div>
-        <div class="pillier-title">Cycle de vie des produits & services numériques</div>
-        <p class="pillier-desc">ITIL® V5 couvre le cycle de vie complet, de la découverte et conception jusqu'à l'opération, la livraison et le support. Produit et service sont désormais gérés de manière intégrée pour maximiser la création de valeur.</p>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="price-card">
+        <div class="price-card-top">
+          <div class="tarif-label">Disponible maintenant</div>
+          <div style="font-family:'Satoshi',sans-serif;font-size:1.3rem;font-weight:900;color:#FFFFFF;line-height:1.2;margin-bottom:4px">ITIL® 4 Foundation</div>
+          <div class="tarif-note">Le prérequis pour ITIL V5</div>
+        </div>
+        <div class="price-card-body">
+          <a href="formation.html" class="btn btn-amber btn-block" style="text-align:center;padding:12px;margin-bottom:8px">Voir la formation →</a>
+          <a href="reservation.html" class="btn btn-outline btn-block" style="text-align:center;padding:11px">Réserver ma place</a>
+        </div>
       </div>
-      <div class="pillier-card">
-        <div class="pillier-icon">🤖</div>
-        <div class="pillier-title">IA & automatisation natives</div>
-        <p class="pillier-desc">Première version d'ITIL® à intégrer nativement l'intelligence artificielle. Le framework fournit des repères pour exploiter l'IA et l'automatisation dans les opérations IT, tout en maintenant le contrôle humain et la gouvernance.</p>
-      </div>
-      <div class="pillier-card">
-        <div class="pillier-icon">⚙️</div>
-        <div class="pillier-title">Système de Valeur des Services (SVS)</div>
-        <p class="pillier-desc">Le SVS ITIL® V5 articule gouvernance, principes directeurs, chaîne de valeur, pratiques de gestion et amélioration continue. Il fournit une vision holistique de la création de valeur au sein des organisations digitales.</p>
-      </div>
-      <div class="pillier-card">
-        <div class="pillier-icon">🔄</div>
-        <div class="pillier-title">Amélioration continue intégrée</div>
-        <p class="pillier-desc">L'amélioration continue n'est plus un processus parmi d'autres — elle est au cœur de chaque pratique ITIL® V5. Le modèle en 7 étapes guide les organisations pour ancrer une culture d'amélioration dans leur quotidien opérationnel.</p>
-      </div>
-    </div>
-  </div>
 
-  <!-- CE QUE VOUS APPRENEZ -->
-  <div>
-    <span class="sec-tag">Programme</span>
-    <h2>Ce que vous apprendrez avec ITIL® V5</h2>
-    <p class="sec-sub">La certification ITIL® Foundation (Version 5) couvre 8 domaines de compétences clés, reconnus par les employeurs du monde entier.</p>
-    <div class="learn-grid">
-      <div class="learn-item">
-        <div class="learn-dot">1</div>
-        <div class="learn-text"><strong>Gestion des produits & services numériques</strong>Concepts fondamentaux : création de valeur, cycle de vie, co-création avec les parties prenantes.</div>
-      </div>
-      <div class="learn-item">
-        <div class="learn-dot">2</div>
-        <div class="learn-text"><strong>Co-création de valeur</strong>Comment la valeur se crée en collaboration entre prestataires, consommateurs et parties prenantes.</div>
-      </div>
-      <div class="learn-item">
-        <div class="learn-dot">3</div>
-        <div class="learn-text"><strong>Les 4 dimensions</strong>Organisations & Personnes · Flux de valeur & Processus · Information & Technologie · Partenaires & Fournisseurs.</div>
-      </div>
-      <div class="learn-item">
-        <div class="learn-dot">4</div>
-        <div class="learn-text"><strong>Le Système de Valeur des Services</strong>Architecture complète du SVS : gouvernance, chaîne de valeur, principes directeurs et amélioration continue.</div>
-      </div>
-      <div class="learn-item">
-        <div class="learn-dot">5</div>
-        <div class="learn-text"><strong>Les 7 principes directeurs</strong>Application pratique pour prendre de meilleures décisions et adapter ITIL® à votre contexte réel.</div>
-      </div>
-      <div class="learn-item">
-        <div class="learn-dot">6</div>
-        <div class="learn-text"><strong>Cycle de vie produit & service</strong>De la découverte au support : comprendre le rôle de chaque activité dans la création de valeur.</div>
-      </div>
-      <div class="learn-item">
-        <div class="learn-dot">7</div>
-        <div class="learn-text"><strong>Les pratiques de gestion ITIL®</strong>Rôle des pratiques officielles et comment elles supportent des modes de travail cohérents et efficaces.</div>
-      </div>
-      <div class="learn-item">
-        <div class="learn-dot">8</div>
-        <div class="learn-text"><strong>Value Stream Mapping</strong>Identifier, cartographier et gérer les flux de valeur pour améliorer la visibilité et les résultats.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- COMPÉTENCES -->
-  <div>
-    <span class="sec-tag">Compétences acquises</span>
-    <h2>3 compétences clés que vous développez</h2>
-    <div class="skills-layout">
-      <div class="skill-card">
-        <div class="skill-icon">🧩</div>
-        <div class="skill-title">Pensée cycle de vie</div>
-        <p class="skill-desc">Adopter un mindset "lifecycle" pour prendre de meilleures décisions, anticiper les changements, réduire la dette technique et maintenir l'alignement des équipes.</p>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">🤝</div>
-        <div class="skill-title">Travail collaboratif orienté valeur</div>
-        <p class="skill-desc">Renforcer la collaboration entre rôles et équipes en s'alignant sur des résultats partagés, la transparence et la co-création de valeur bout en bout.</p>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">📈</div>
-        <div class="skill-title">Mindset d'amélioration continue</div>
-        <p class="skill-desc">Intégrer l'amélioration continue dans le travail quotidien, développer une culture de croissance et s'adapter rapidement dans les environnements digitaux complexes.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- DÉBOUCHÉS MÉTIERS -->
-  <div>
-    <span class="sec-tag">Débouchés professionnels</span>
-    <h2>Les métiers qui recrutent des certifiés ITIL® V5</h2>
-    <p class="sec-sub">La certification ITIL® V5 Foundation ouvre les portes à une large gamme de rôles IT, reconnus et recherchés par les employeurs dans le monde entier.</p>
-    <div class="metiers-grid">
-      <div class="metier-item">IT Service Manager</div>
-      <div class="metier-item">IT Operations Specialist</div>
-      <div class="metier-item">Digital Product Manager</div>
-      <div class="metier-item">Product Owner</div>
-      <div class="metier-item">IT Project Manager</div>
-      <div class="metier-item">IT Team Leader</div>
-      <div class="metier-item">Service Delivery Specialist</div>
-      <div class="metier-item">Change Manager</div>
-      <div class="metier-item">Transformation Manager</div>
-      <div class="metier-item">Enterprise Architect</div>
-      <div class="metier-item">Customer Success Manager</div>
-      <div class="metier-item">Chief Digital Officer</div>
-      <div class="metier-item">Service Improvement Manager</div>
-      <div class="metier-item">IT Development Manager</div>
-      <div class="metier-item">Solution Designer</div>
-      <div class="metier-item">Experience Manager</div>
-    </div>
-  </div>
-
-  <!-- ITIL® 4 vs V5 -->
-  <div>
-    <span class="sec-tag">ITIL® 4 vs ITIL® V5</span>
-    <h2>Vous avez déjà ITIL® 4 ? Voici les nouveautés</h2>
-    <p class="sec-sub">ITIL® V5 n'efface pas ITIL® 4 — il l'enrichit et l'adapte aux enjeux de 2025. Un module Bridge permet aux certifiés ITIL® 4 de migrer rapidement.</p>
-    <div class="compare-grid">
-      <div class="compare-card">
-        <div class="compare-title">ITIL® 4 Foundation <span class="compare-badge badge-old">Précédent</span></div>
-        <ul class="compare-list">
-          <li>Centré sur la gestion des services IT</li>
-          <li>4 dimensions de la gestion des services</li>
-          <li>Système de Valeur des Services (SVS)</li>
-          <li>34 pratiques de gestion</li>
-          <li>7 principes directeurs</li>
-          <li>Amélioration continue comme pratique distincte</li>
-          <li>Certification valable à vie (ancienne règle)</li>
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Pourquoi se certifier maintenant ?</div>
+        <ul class="check-list" style="margin-top:4px">
+          <li class="check-item"><span class="check-icon">✓</span><span>ITIL 4 = prérequis ITIL V5</span></li>
+          <li class="check-item"><span class="check-icon">✓</span><span>Certification valable à vie</span></li>
+          <li class="check-item"><span class="check-icon">✓</span><span>Reconnaissance internationale immédiate</span></li>
+          <li class="check-item"><span class="check-icon">✓</span><span>Parcours de transition prévu vers V5</span></li>
         </ul>
       </div>
-      <div class="compare-card new">
-        <div class="compare-title">ITIL® V5 Foundation <span class="compare-badge badge-new">Nouveau</span></div>
-        <ul class="compare-list">
-          <li>Centré sur les <strong>produits & services numériques</strong></li>
-          <li>Vision cycle de vie complet (de l'idée au support)</li>
-          <li>IA et automatisation <strong>intégrées nativement</strong></li>
-          <li>Value Stream Mapping inclus</li>
-          <li>Co-création de valeur avec toutes les parties prenantes</li>
-          <li>Amélioration continue <strong>au cœur de chaque pratique</strong></li>
-          <li>Renouvellement tous les 3 ans (60 CPD points)</li>
-        </ul>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">North IT & ITIL® V5</div>
+        <p style="font-size:.82rem;color:var(--muted);line-height:1.65;margin-bottom:12px">North IT est l'un des premiers organismes ATO en France à suivre activement l'évolution vers ITIL V5. Nous formons nos formateurs et adaptons nos programmes en continu.</p>
+        <a href="contact.html" style="font-size:.82rem;font-weight:700;color:var(--amber)">Nous contacter pour en savoir plus →</a>
       </div>
     </div>
-  </div>
 
-  <!-- EXAMEN -->
-  <div>
-    <span class="sec-tag">L'examen de certification</span>
-    <h2>Format de l'examen ITIL® V5 Foundation</h2>
-    <p class="sec-sub">L'examen officiel PeopleCert est passé en ligne, en conditions surveillées. Il est inclus dans notre formation North IT.</p>
-    <div class="exam-card">
-      <div class="exam-item">
-        <div class="exam-icon">📝</div>
-        <div class="exam-val">40</div>
-        <div class="exam-label">questions à choix multiples</div>
-      </div>
-      <div class="exam-item">
-        <div class="exam-icon">⏱️</div>
-        <div class="exam-val">60</div>
-        <div class="exam-label">minutes de durée</div>
-      </div>
-      <div class="exam-item">
-        <div class="exam-icon">🎯</div>
-        <div class="exam-val">65%</div>
-        <div class="exam-label">score minimum pour réussir (26/40)</div>
-      </div>
-      <div class="exam-item">
-        <div class="exam-icon">📕</div>
-        <div class="exam-val">Fermé</div>
-        <div class="exam-label">livre fermé, sans documentation autorisée</div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<!-- CTA -->
-<section class="cta-band">
-  <h2>Prêt à vous former &amp; certifier ITIL® ?</h2>
-  <p>North IT, ATO agréé PeopleCert. Certifiez-vous ITIL® 4 Foundation dès maintenant — ITIL® V5 Foundation disponible prochainement.</p>
-  <div class="cta-btns">
-    <a href="formation.html" class="cta-white">Voir la formation →</a>
-    <a href="contact.html" class="cta-ghost">Réserver ma place</a>
   </div>
 </section>
 
-<footer>
-  <div class="foot-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:32px;max-width:1100px;margin:0 auto 32px">
-    <div>
-      <p style="font-size:.83rem;color:var(--muted);line-height:1.7;margin-bottom:10px">Organisme de formation et de certification ITIL® basé à Paris. ATO agréé PeopleCert.</p>
-      <p style="font-size:.75rem;color:rgba(244,247,255,.3);line-height:1.8">SIRET : 881 897 482 00017<br>Déclaration d'activité : 11756378175<br>✉️ <a href="/cdn-cgi/l/email-protection#33561d54565c41545640735d5c41475b5a471d5541" style="color:var(--cyan);text-decoration:none"><span class="__cf_email__" data-cfemail="64014a03010b16030117240a0b16100c0d104a0216">[email&#160;protected]</span></a></p>
-    </div>
-    <div>
-      <div style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:14px">Formation</div>
-      <a href="formation.html" style="display:block;font-size:.83rem;color:rgba(244,247,255,.45);text-decoration:none;margin-bottom:8px">Certification ITIL® 4 Foundation</a>
-      <a href="itil-v5.html" style="display:block;font-size:.83rem;color:rgba(244,247,255,.45);text-decoration:none;margin-bottom:8px">Découvrir ITIL® V5</a>
-      <a href="formation.html" style="display:block;font-size:.83rem;color:rgba(244,247,255,.45);text-decoration:none;margin-bottom:8px">Programme complet</a>
-      <a href="contact.html" style="display:block;font-size:.83rem;color:rgba(244,247,255,.45);text-decoration:none;margin-bottom:8px">Financement intra</a>
-    </div>
-    <div>
-      <div style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:14px">À propos</div>
-      <a href="about.html" style="display:block;font-size:.83rem;color:rgba(244,247,255,.45);text-decoration:none;margin-bottom:8px">Qui sommes-nous ?</a>
-      <a href="references.html" style="display:block;font-size:.83rem;color:rgba(244,247,255,.45);text-decoration:none;margin-bottom:8px">Références clients</a>
-      <a href="contact.html" style="display:block;font-size:.83rem;color:rgba(244,247,255,.45);text-decoration:none;margin-bottom:8px">Contact</a>
-      <a href="termes.html" style="display:block;font-size:.83rem;color:rgba(244,247,255,.45);text-decoration:none;margin-bottom:8px">Termes et conditions</a>
+<div class="cta-band">
+  <div class="cta-band-inner">
+    <h2>Anticipez ITIL® V5 — certifiez-vous ITIL® 4 dès maintenant</h2>
+    <p>La certification ITIL® 4 Foundation est le prérequis incontournable pour accéder à ITIL V5</p>
+    <div class="cta-btns">
+      <a href="reservation.html" class="btn-cta-white">Réserver ma place</a>
+      <a href="contact.html" class="btn-cta-ghost">Nous contacter →</a>
     </div>
   </div>
-  <div style="border-top:1px solid rgba(255,255,255,.06);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.75rem;color:rgba(244,247,255,.3);max-width:1100px;margin:0 auto">
-    <span>© 2025 North IT. Tous droits réservés. ITIL® est une marque déposée d'AXELOS Limited.</span>
-    <a
+</div>
+
+</body>
+</html>
