@@ -1,101 +1,92 @@
-// Netlify Function — invite-user.js
-// Chemin dans le repo : netlify/functions/invite-user.js
-// Variables d'env à configurer dans Netlify > Site > Environment variables :
-//   SUPABASE_URL         → https://muygrrpnrfppjdgcbobx.supabase.co
-//   SUPABASE_SERVICE_KEY → votre clé secrète (sb_secret_...)
-//   SITE_URL             → https://northit.fr
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Comment passer la certification ITIL® 4 Foundation ? | Blog North IT</title>
+<meta name="description" content="Guide complet pour préparer et réussir l'examen ITIL® 4 Foundation PeopleCert : programme, format, conseils de révision."/>
+<meta name="keywords" content="passer certification ITIL 4, examen ITIL Foundation, réussir ITIL 4, préparation certification ITIL PeopleCert"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://northit.fr/blog-comment-passer-certification-itil-4-foundation.html"/>
+<link rel="preconnect" href="https://api.fontshare.com"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,800,900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="northit.css"/>
+<script src="components.js"></script>
+</head>
+<body>
 
-exports.handler = async (event) => {
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
-  }
+<div class="breadcrumb-bar"><div class="breadcrumb-inner"><a href="index.html">Accueil</a><span>›</span><a href="blog.html">Blog</a><span>›</span>Comment passer la certification ITIL® 4 Foundation ?</div></div>
 
-  const SUPABASE_URL  = process.env.SUPABASE_URL;
-  const SERVICE_KEY   = process.env.SUPABASE_SERVICE_KEY;
-  const SITE_URL      = process.env.SITE_URL || 'https://northit.fr';
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="badges"><span class="badge badge-amber">Guide certification</span><span class="badge badge-gray">Par Éric GEORGES · North IT</span></div>
+    <h1>Comment passer la certification ITIL® 4 Foundation ?</h1>
+  </div>
+</div>
 
-  if (!SUPABASE_URL || !SERVICE_KEY) {
-    return { statusCode: 500, body: JSON.stringify({ error: 'Configuration serveur manquante.' }) };
-  }
+<section class="section section-soft">
+  <div class="section-inner" style="display:grid;grid-template-columns:1fr 300px;gap:32px;align-items:start">
+    <div>
+      <div class="panel-card">
+        <p style="font-size:.95rem;color:var(--muted);line-height:1.85;margin-bottom:24px;font-style:italic;border-left:3px solid var(--amber);padding-left:16px">La certification ITIL® 4 Foundation est l'une des certifications IT les plus reconnues au monde. Chaque année, des milliers de professionnels passent cet examen pour valider leurs connaissances en gestion des services IT. Voici le guide complet pour vous préparer et réussir.</p>
+        
+        <div style="margin-bottom:24px">
+          <h2 style="font-size:1.2rem;margin-bottom:10px">Format de l'examen PeopleCert</h2>
+          <p style="font-size:.92rem;color:var(--muted);line-height:1.85">L'examen ITIL® 4 Foundation est un QCM de 40 questions à choix unique. Durée : 60 minutes. Note minimale : 65% soit 26 bonnes réponses sur 40. L'examen se passe en ligne, surveillé à distance par PeopleCert via webcam. Votre voucher est valable 1 an à partir de la fin de la formation.</p>
+        </div>
+        <div style="border-top:1px solid var(--border);padding-top:24px;margin-bottom:24px">
+          <h2 style="font-size:1.2rem;margin-bottom:10px">Le programme à maîtriser</h2>
+          <p style="font-size:.92rem;color:var(--muted);line-height:1.85">Pour réussir l'examen, vous devez maîtriser : les concepts clés de la gestion des services, le Système de Valeur des Services (SVS), les 4 dimensions, les 7 principes directeurs, la chaîne de valeur des services et ses 6 activités, et les 34 pratiques ITIL® 4. La formation North IT couvre l'intégralité du programme en 3 jours.</p>
+        </div>
+        <div style="border-top:1px solid var(--border);padding-top:24px">
+          <h2 style="font-size:1.2rem;margin-bottom:10px">Conseils pour réussir l'examen</h2>
+          <p style="font-size:.92rem;color:var(--muted);line-height:1.85">Lisez chaque question attentivement — les formulations sont précises. Éliminez les mauvaises réponses avant de choisir. Gérez votre temps : 1 minute 30 par question. Faites l'examen blanc de la formation pour vous habituer au format. Ne restez pas bloqué sur une question — passez à la suivante.</p>
+        </div>
+      </div>
+      <div style="background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:12px;padding:24px;margin-top:16px">
+        <div style="font-family:'Satoshi',sans-serif;font-weight:900;color:var(--text);margin-bottom:8px">Éric GEORGES — Auteur</div>
+        <p style="font-size:.85rem;color:var(--muted);line-height:1.65">Fondateur de North IT. 16 ans d'expérience en formation et conseil ITIL®. Certifié ITIL® Expert et ITIL® V5. Ancien Principal Consultant chez Capgemini.</p>
+      </div>
+    </div>
+    <div class="sidebar">
+      <div class="price-card">
+        <div class="price-card-top">
+          <div class="tarif-label">Formation certifiante</div>
+          <div style="font-family:'Satoshi',sans-serif;font-size:1.1rem;font-weight:900;color:#FFFFFF;line-height:1.2;margin-bottom:4px">ITIL® 4 Foundation</div>
+          <div class="tarif-note">Voucher PeopleCert · 1 700 € HT</div>
+        </div>
+        <div class="price-card-body">
+          <a href="reservation.html" class="btn btn-amber btn-block" style="text-align:center;padding:11px;margin-bottom:8px">Réserver →</a>
+          <a href="formation.html" class="btn btn-outline btn-block" style="text-align:center;padding:10px">Voir le programme</a>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Autres articles</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+          <a href="blog-comment-passer-certification-itil-4-foundation.html" style="font-size:.82rem;color:var(--text);font-weight:600;text-decoration:none;line-height:1.4">Comment passer la certification ITIL® 4 ?</a>
+          <a href="blog-itil4-vs-itil-v3-differences.html" style="font-size:.82rem;color:var(--text);font-weight:600;text-decoration:none;line-height:1.4">ITIL® 4 vs ITIL® v3</a>
+          <a href="blog-itil4-devops-agile.html" style="font-size:.82rem;color:var(--text);font-weight:600;text-decoration:none;line-height:1.4">ITIL® 4 et DevOps</a>
+          <a href="blog-metiers-qui-recrutent-avec-itil-4.html" style="font-size:.82rem;color:var(--text);font-weight:600;text-decoration:none;line-height:1.4">Métiers qui recrutent avec ITIL® 4</a>
+          <a href="itil-v5.html" style="font-size:.82rem;color:var(--text);font-weight:600;text-decoration:none;line-height:1.4">ITIL® V5 — ce que l'on sait</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  // 1. Vérifier que l'appelant est bien connecté
-  const authHeader = event.headers.authorization || '';
-  const token = authHeader.replace('Bearer ', '').trim();
-  if (!token) {
-    return { statusCode: 401, body: JSON.stringify({ error: 'Non authentifié.' }) };
-  }
+<div class="cta-band">
+  <div class="cta-band-inner">
+    <h2>Prêt à vous certifier ITIL® 4 ?</h2>
+    <p>Formation 3 jours · Distanciel · Voucher PeopleCert inclus · 1 700 € HT</p>
+    <div class="cta-btns">
+      <a href="reservation.html" class="btn-cta-white">Réserver ma place</a>
+      <a href="formation.html" class="btn-cta-ghost">Voir le programme →</a>
+    </div>
+  </div>
+</div>
 
-  // 2. Récupérer l'utilisateur depuis le token
-  const userRes = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
-    headers: { 'Authorization': `Bearer ${token}`, 'apikey': SERVICE_KEY }
-  });
-  if (!userRes.ok) {
-    return { statusCode: 401, body: JSON.stringify({ error: 'Token invalide.' }) };
-  }
-  const { id: callerId } = await userRes.json();
-
-  // 3. Vérifier que l'appelant est formateur
-  const roleRes = await fetch(
-    `${SUPABASE_URL}/rest/v1/user_roles?user_id=eq.${callerId}&role=eq.formateur&select=role`,
-    { headers: { 'Authorization': `Bearer ${SERVICE_KEY}`, 'apikey': SERVICE_KEY } }
-  );
-  const roles = await roleRes.json();
-  if (!Array.isArray(roles) || roles.length === 0) {
-    return { statusCode: 403, body: JSON.stringify({ error: 'Accès réservé au formateur.' }) };
-  }
-
-  // 4. Parser le body
-  let email, full_name, role;
-  try {
-    const body = JSON.parse(event.body);
-    email     = body.email?.trim();
-    full_name = body.full_name?.trim();
-    role      = body.role || 'apprenant';
-  } catch {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Corps de requête invalide.' }) };
-  }
-
-  if (!email || !full_name) {
-    return { statusCode: 400, body: JSON.stringify({ error: 'email et full_name sont requis.' }) };
-  }
-
-  // 5. Inviter l'utilisateur via Supabase Admin API
-  const inviteRes = await fetch(`${SUPABASE_URL}/auth/v1/admin/invite`, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${SERVICE_KEY}`,
-      'apikey': SERVICE_KEY,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      email,
-      data: { full_name },
-      redirect_to: `${SITE_URL}/espace-apprenant.html`
-    })
-  });
-
-  const inviteData = await inviteRes.json();
-  if (!inviteRes.ok) {
-    return { statusCode: 400, body: JSON.stringify({ error: inviteData.msg || inviteData.message || 'Erreur invitation.' }) };
-  }
-
-  // 6. Ajouter le rôle dans user_roles
-  const newUserId = inviteData.id;
-  if (newUserId) {
-    await fetch(`${SUPABASE_URL}/rest/v1/user_roles`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${SERVICE_KEY}`,
-        'apikey': SERVICE_KEY,
-        'Content-Type': 'application/json',
-        'Prefer': 'resolution=merge-duplicates'
-      },
-      body: JSON.stringify({ user_id: newUserId, role, full_name })
-    });
-  }
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ success: true, message: `Invitation envoyée à ${email}` })
-  };
-};
+</body>
+</html>
